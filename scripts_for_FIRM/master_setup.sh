@@ -28,7 +28,7 @@ kubectl get pods --all-namespaces
 
 ## Deploy FIRM  https://gitlab.engr.illinois.edu/DEPEND/firm/-/tree/master?ref_type=heads
 cd ~
-git clone https://gitlab.engr.illinois.edu/DEPEND/firm.git
+git clone https://github.com/KFCDeveloper/firm.git # https://gitlab.engr.illinois.edu/DEPEND/firm.git
 sudo apt install -y python3-pip
 pip3 install --upgrade pip
 python3 -m pip install --upgrade setuptools
