@@ -19,6 +19,7 @@ kubeadm version
 # Deploy Kubernetes
 sudo swapoff -a
 # sudo hostnamectl set-hostname your_hostname
+# If you forget the command or the token is expired, run "kubeadm token create --print-join-command" on master node
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -35,6 +36,7 @@ python3 -m pip install --upgrade setuptools
 cd firm/
 # pip3 install -r requirements.txt # something wrong with the packages
 pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 wheel==0.30.0 numpy==1.18.1 redis==3.5.3 grpcio==1.31.0 torch==1.6.0 env==0.1.0 h5py==2.10.0 ipython Pillow==7.2.0 python_dateutil==2.8.1 scikit_learn==0.23.2 neo4j==4.1.0 grpcio-tools==1.30.0
+# On each node, install anomaly injector:
 cd anomaly-injector
 make
 cd sysbench
