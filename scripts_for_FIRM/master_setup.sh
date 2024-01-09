@@ -24,7 +24,7 @@ sudo swapoff -a
 # sudo hostnamectl set-hostname your_hostname
 # If you forget the command or the token is expired, run "kubeadm token create --print-join-command" on master node
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
-mkdir -p $HOME/.kube
+sudo mkdir -p $HOME/.kube
 echo "********************** create kube"
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
