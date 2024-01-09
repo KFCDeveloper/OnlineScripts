@@ -1,7 +1,7 @@
 #!/bin/bash
 ## master node
 
-# sudo su DylanYu # **** change user name ****
+sudo su DylanYu # **** change user name ****
 # export HOME="/users/DylanYu"
 
 ## mount /dev/sda4 to ~/workspace   that's for CloudLab
