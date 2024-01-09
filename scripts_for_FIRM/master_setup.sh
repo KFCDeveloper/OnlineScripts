@@ -1,6 +1,8 @@
 #!/bin/bash
 ## master node
-# short_hostname=$(hostname --short)
+
+sudo su DylanYu # **** change user name ****
+
 ## mount /dev/sda4 to ~/workspace   that's for CloudLab
 sudo mkfs.ext4 /dev/sda4
 sudo mount /dev/sda4 ~
