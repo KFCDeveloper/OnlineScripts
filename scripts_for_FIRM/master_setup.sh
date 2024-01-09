@@ -1,30 +1,31 @@
 #!/bin/bash
-# ## master node
-# # short_hostname=$(hostname --short)
-# ## mount /dev/sda4 to ~/workspace   that's for CloudLab
-# sudo mkfs.ext4 /dev/sda4
-# sudo mount /dev/sda4 ~
+## master node
+# short_hostname=$(hostname --short)
+## mount /dev/sda4 to ~/workspace   that's for CloudLab
+sudo mkfs.ext4 /dev/sda4
+sudo mount /dev/sda4 ~
 
-# ## https://gitlab.engr.illinois.edu/DEPEND/firm/-/blob/master/setup-k8s.md
-# # Install Docker
-# sudo apt update
-# sudo apt install -y docker.io
-# docker -v
-# # Start and Enable Docker
-# sudo systemctl enable docker
-# sudo systemctl start docker
-# # Install Kubernetes
-# curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
-# sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-# sudo apt install -y kubeadm kubelet kubectl
-# sudo apt-mark hold kubeadm kubelet kubectl
-# kubeadm version
+## https://gitlab.engr.illinois.edu/DEPEND/firm/-/blob/master/setup-k8s.md
+# Install Docker
+sudo apt update
+sudo apt install -y docker.io
+docker -v
+# Start and Enable Docker
+sudo systemctl enable docker
+sudo systemctl start docker
+# Install Kubernetes
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+sudo apt install -y kubeadm kubelet kubectl
+sudo apt-mark hold kubeadm kubelet kubectl
+kubeadm version
 # Deploy Kubernetes
 sudo swapoff -a
 # sudo hostnamectl set-hostname your_hostname
 # If you forget the command or the token is expired, run "kubeadm token create --print-join-command" on master node
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 mkdir -p $HOME/.kube
+echo "********************** create kube"
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
