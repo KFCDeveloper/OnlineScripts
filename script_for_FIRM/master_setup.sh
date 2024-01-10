@@ -84,4 +84,3 @@ make all
 pip3 install virtualenv
 cd python-cat-mba
 make env    # I remove "make -C ../../lib/python install; \"  it is weird
-exit
