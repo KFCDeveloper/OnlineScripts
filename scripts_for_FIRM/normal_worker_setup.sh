@@ -1,7 +1,7 @@
 #!/bin/bash
 # worker node
 # sudo su DylanYu # **** change user name ****
-export HOME="/users/DylanYu"
+# export HOME="/users/DylanYu"
 
 ## mount /dev/sda4 to ~/workspace   that's for CloudLab
 sudo mkfs.ext4 /dev/sda4
