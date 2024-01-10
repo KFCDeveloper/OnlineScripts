@@ -54,6 +54,7 @@ make -j
 sudo make install
 
 # Deploy tracing, metrics exporting, collection agents:
+echo "*********** ssh DylanYu@c240g5-110101.wisc.cloudlab.us *************************"
 cd ~/firm
 export NAMESPACE='monitoring'
 kubectl create -f manifests/setup
@@ -75,6 +76,7 @@ cd deploy-trace-grapher
 make prepare-trace-grapher-namespace
 make install-components # cannot execute 
 # Install deployment module:
+echo "*********** Install deployment module *************************"
 exit # leave container
 cd ~/firm/third-party/intel-cmt-cat
 sudo make install # you need to make intel-cmt-cat otherwise there is no libs of intel-cmt-cat in /lib
