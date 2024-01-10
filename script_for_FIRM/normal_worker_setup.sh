@@ -7,7 +7,7 @@
 sudo mkfs.ext4 /dev/sda4
 sudo mount /dev/sda4 ~
 
-## Setup Kubernetes Cluster    https://gitlab.engr.illinois.edu/DEPEND/firm/-/blob/master/setup-k8s.md
+## https://gitlab.engr.illinois.edu/DEPEND/firm/-/blob/master/setup-k8s.md
 # Install Docker
 sudo apt update
 sudo apt install -y docker.io
@@ -46,6 +46,7 @@ sudo make -j
 sudo make install
 
 # Deploy tracing, metrics exporting, collection agents:
+echo "*********** Deploy tracing, metrics exporting, collection agents *************************"
 cd ~/firm
 export NAMESPACE='monitoring'
 kubectl create -f manifests/setup
@@ -60,7 +61,8 @@ kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operato
 kubectl create -f manifests/
 
 # Install deployment module:
-exit # leave container
+echo "*********** Install deployment module *************************"
+# exit # leave container
 cd ~/firm/third-party/intel-cmt-cat
 sudo make install # you need to make intel-cmt-cat otherwise there is no libs of intel-cmt-cat in /lib
 cd ~/firm/scripts   # because author's 

@@ -86,3 +86,12 @@ sudo make all
 sudo pip3 install virtualenv
 cd python-cat-mba
 sudo make env    # I remove "make -C ../../lib/python install; \"  it is weird
+
+## Set Up Microservice Benchmarks With Tracing Enabled
+# Pre-requirements 
+sudo pip install asyncio
+sudo pip install aiohttp
+sudo apt install -y libssl-dev libz-dev luarocks
+sudo luarocks install luasocket
+# Configure the DNS Resolver
+sudo vim ~/firm/benchmarks/1-social-network/nginx-web-server/conf/nginx-k8s.conf
