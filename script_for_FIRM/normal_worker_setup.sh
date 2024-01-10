@@ -30,19 +30,19 @@ sudo swapoff -a
 cd ~
 sudo git clone https://github.com/KFCDeveloper/firm.git # https://gitlab.engr.illinois.edu/DEPEND/firm.git
 sudo apt install -y python3-pip
-pip3 install --upgrade pip
-python3 -m pip install --upgrade setuptools
+sudo pip3 install --upgrade pip
+sudo python3 -m pip install --upgrade setuptools
 cd firm/
 # pip3 install -r requirements.txt # something wrong with the packages
-pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 wheel==0.30.0 numpy==1.18.1 redis==3.5.3 grpcio==1.31.0 torch==1.6.0 env==0.1.0 h5py==2.10.0 ipython Pillow==7.2.0 python_dateutil==2.8.1 scikit_learn==0.23.2 neo4j==4.1.0 grpcio-tools==1.30.0
+sudo pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 wheel==0.30.0 numpy==1.18.1 redis==3.5.3 grpcio==1.31.0 torch==1.6.0 env==0.1.0 h5py==2.10.0 ipython Pillow==7.2.0 python_dateutil==2.8.1 scikit_learn==0.23.2 neo4j==4.1.0 grpcio-tools==1.30.0
 # On each node, install anomaly injector:
 cd anomaly-injector
-make
+sudo make
 cd sysbench
-./autogen.sh
+sudo ./autogen.sh
 sudo apt install -y libmysqlclient-dev # lack MySQL libraries
-./configure
-make -j
+sudo ./configure
+sudo make -j
 sudo make install
 
 # Deploy tracing, metrics exporting, collection agents:
@@ -64,8 +64,8 @@ exit # leave container
 cd ~/firm/third-party/intel-cmt-cat
 sudo make install # you need to make intel-cmt-cat otherwise there is no libs of intel-cmt-cat in /lib
 cd ~/firm/scripts   # because author's 
-make all
+sudo make all
 # need to install virtualenv before "make env"
-pip3 install virtualenv
+sudo pip3 install virtualenv
 cd python-cat-mba
-make env    # I remove "make -C ../../lib/python install; \"  it is weird
+sudo make env    # I remove "make -C ../../lib/python install; \"  it is weird
