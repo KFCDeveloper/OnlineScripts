@@ -94,4 +94,4 @@ sudo pip install aiohttp
 sudo apt install -y libssl-dev libz-dev luarocks
 sudo luarocks install luasocket
 # Configure the DNS Resolver
-sudo vim ~/firm/benchmarks/1-social-network/nginx-web-server/conf/nginx-k8s.conf
+# sudo vim ~/firm/benchmarks/1-social-network/nginx-web-server/conf/nginx-k8s.conf
