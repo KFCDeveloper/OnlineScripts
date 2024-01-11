@@ -95,3 +95,12 @@ sudo apt install -y libssl-dev libz-dev luarocks
 sudo luarocks install luasocket
 # Configure the DNS Resolver
 # sudo vim ~/firm/benchmarks/1-social-network/nginx-web-server/conf/nginx-k8s.conf
+# Deploy Services     Change the /root/firm/ to <path-of-repo> 
+kubectl apply -f ~/firm/benchmarks/1-social-network/k8s-yaml/social-network-ns.yaml
+kubectl apply -f ~/firm/benchmarks/1-social-network/k8s-yaml/
+kubectl -n social-network get pod
+# Setup Services
+kubectl -n social-network get svc nginx-thrift
+# Copy & Paste 10.105.83.130   ###### to copy and paste 
+cd ~/firm/benchmarks/1-social-network
+
