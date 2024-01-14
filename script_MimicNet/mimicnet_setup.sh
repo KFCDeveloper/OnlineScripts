@@ -2,6 +2,7 @@
 # sudo add-apt-repository -y ppa:graphics-drivers/ppa
 # ubuntu-drivers devices
 # sudo apt-get install -y nvidia-driver-470
+sudo apt install tmux
 
 sudo mkfs.ext4 /dev/sda4
 sudo mount /dev/sda4 ~
@@ -17,9 +18,10 @@ sudo service docker start
 df -h ~ # make sure your disk space is enough
 sudo docker pull pytorch/pytorch-binary-docker-image-ubuntu16.04:new
 # run the image  
-docker run -it --name mymimicnet -d pytorch/pytorch-binary-docker-image-ubuntu16.04 /bin/bash
+docker run -it --name mymimicnet  -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=unix$DISPLAY -d pytorch/pytorch-binary-docker-image-ubuntu16.04 /bin/bash
+
 # run the container
-# sudo docker exec -it 2814b92c9ed8 /bin/bash
+# sudo docker exec -it 76c30bbd0cc0 /bin/bash
 # if you reboot the server, you need to follow the step
 # 1. sudo mount /dev/sda4 ~
 # 2. sudo service docker restart
@@ -28,8 +30,11 @@ docker run -it --name mymimicnet -d pytorch/pytorch-binary-docker-image-ubuntu16
 # if you want to save the running container
 
 # create new user
-adduser mimicnet
-usermod -aG sudo mimicnet
-su mimicnet
+# adduser mimicnet
+# usermod -aG sudo mimicnet
+# su mimicnet
+# export DISPLAY=:0.0
+
 cd ~
+apt-get install sudo -y
 git clone https://github.com/eniac/MimicNet.git
