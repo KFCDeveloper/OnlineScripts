@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# ******* FIRM cannot been deployed **********
+
 ## master node
 
 # sudo su DylanYu # **** change user name ****
