@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /mydata
-sudo -R chmod 777 /mydata
+sudo chmod -R  777 /mydata
 # install cuda
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt install ubuntu-drivers-common
@@ -16,8 +16,9 @@ source ~/.bashrc
 # create new env and install package
 conda create --name casual_sim_abr python=3.8 -y
 conda activate casual_sim_abr
-conda install numpy pandas tqdm matplotlib scikit-learn pytorch torchvision torchaudio -y
+conda install numpy pandas tqdm matplotlib scikit-learn pytorch torchvision python-wget torchaudio -y
 
 # clone project
 cd /mydata
 git clone https://github.com/CausalSim/Unbiased-Trace-Driven-Simulation.git
+
