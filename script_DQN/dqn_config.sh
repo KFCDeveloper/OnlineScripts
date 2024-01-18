@@ -2,7 +2,7 @@
 ## master node
 cd /mydata
 sudo chmod -R  777 /mydata
-
+sudo chmod -R  777 ~
 # install nvidia-driver
 sudo add-apt-repository -y ppa:graphics-drivers/ppa
 sudo apt-get update
@@ -23,5 +23,16 @@ conda activate dqn
 pip install nvidia-pyindex
 pip install nvidia-tensorflow[horovod]
 pip install nvidia-tensorboard==1.15
+# **restart** 
+# **todo** : to upload project from windows
+cd deepqueuenet
+sudo apt-get install unzip -y
+wget https://www.dropbox.com/s/q56sx4hxe93n4g5/DeepQueueNet-dataset.zip?dl=0
+chmod 777 ./DeepQueueNet-dataset.zip\?dl\=0
+mv ./DeepQueueNet-dataset.zip\?dl\=0 ./DeepQueueNet-dataset.zip
+cp -r "DeepQueueNet-synthetic data"/* ./
+rm -r "DeepQueueNet-synthetic data"
+rm DeepQueueNet-dataset.zip
 
-conda install numpy pandas tqdm matplotlib scikit-learn pytorch torchvision python-wget torchaudio -y
+# install packages
+conda install pandas=1.1.5 scipy=1.10.1 seaborn=0.12.2 tqdm matplotlib=3.7.2 jupyter notebook -y
