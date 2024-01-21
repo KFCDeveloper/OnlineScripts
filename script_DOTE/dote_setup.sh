@@ -70,8 +70,13 @@ wget http://www.topology-zoo.org/files/Abilene.gml
 # /networking_envs/data/gml_to_dote.py, set the src_dir, dest_dir and network_name variables.
 python3 gml_to_dote.py
 # don't forget!! To compute the optimum for the demand matrices, go to /mydata/DOTE/networking_envs/data/Abilene and run /mydata/DOTE/networking_envs/data/compute_opts.py
+cd /mydata/DOTE/networking_envs/data/Abilene
+
 
 # install java8
 sudo apt-get update
 sudo apt install openjdk-8-jdk
 # ** **
+
+# DOTE execution code
+python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 2000 --opt_function MAXUTIL
