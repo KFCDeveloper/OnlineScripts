@@ -43,7 +43,12 @@ grbgetkey xxxxxx # https://portal.gurobi.com/iam/licenses/request/?type=academic
 conda create --name dote python=3.8 -y
 conda activate dote
 cd /mydata/DOTE
-conda install scikit-learn numpy=1.19.5 scipy conda-forge::gym joblib dill progressbar2 mpi4py networkx tqdm keras pandas=1.1 statsmodels pytorch::pytorch anaconda::tensorflow-gpu matplotlib
+pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
+conda install scikit-learn numpy=1.19.5 scipy conda-forge::gym joblib dill progressbar2 mpi4py networkx tqdm keras pandas=1.1 statsmodels anaconda::tensorflow-gpu matplotlib
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt update
+sudo apt install gcc-9
+sudo apt install libstdc++6
 
 #** use GEANT dataset **
 mkdir -p /mydata/software/GEANT
