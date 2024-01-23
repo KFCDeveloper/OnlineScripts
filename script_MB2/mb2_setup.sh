@@ -3,7 +3,7 @@
 ## 
 cd /mydata
 sudo chmod -R  777 /mydata
-sudo chmod -R  777 ~
+# sudo chmod -R  777 ~
 
 # install noise page
 cd /mydata
