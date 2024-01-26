@@ -23,3 +23,15 @@ pip install tensorboard torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio
 cd /mydata
 git clone https://github.com/CausalSim/Unbiased-Trace-Driven-Simulation.git
 
+# prepare dataset
+# ** ** 
+
+# train SLSim
+python training/sl_subset_train.py --dir CAUSALSIM_DIR --left_out_policy linear_bba  # python training/sl_subset_train.py --dir CAUSALSIM_DIR --left_out_policy target 
+# train CasualSim
+python training/train_subset.py --dir CAUSALSIM_DIR --left_out_policy linear_bba --C 0.05 
+
+# Counterfactual Simulation
+python inference/extract_subset_latents.py --dir CAUSALSIM_DIR --left_out_policy linear_bba --C 0.05 #  Using CausalSim to extract and save the latent factors
+python inference/expert_cfs.py --dir CAUSALSIM_DIR # ExpertSim
+python inference/sl_subset_cfs.py --dir CAUSALSIM_DIR --left_out_policy linear_bba # SLSim 
