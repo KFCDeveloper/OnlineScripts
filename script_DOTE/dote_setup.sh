@@ -80,4 +80,4 @@ sudo apt install openjdk-8-jdk
 
 # DOTE execution code
 python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 2000 --so_batch_size 200 --opt_function MAXFLOW
-python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 2000 --so_batch_size 200 --opt_function MAXFLOW
+python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 2000 --so_batch_size 32 --opt_function MAXUTIL
