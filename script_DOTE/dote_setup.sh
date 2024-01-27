@@ -78,6 +78,12 @@ sudo apt-get update
 sudo apt install openjdk-8-jdk
 # ** **
 
-# DOTE execution code
+# DOTE training execution code
 python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 2000 --so_batch_size 200 --opt_function MAXFLOW
 python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 2000 --so_batch_size 32 --opt_function MAXUTIL
+
+# DOTE predict execution code
+# train: why first run this, than the latter; I find 1.processing training data 2.start training ;
+python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene --paths_from sp --sl_model_type linear_regression --sl_type stats_comm --opt_function MAXFLOW
+# eval
+python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene --paths_from sp --sl_model_type linear_regression --sl_type eval --opt_function MAXFLOW

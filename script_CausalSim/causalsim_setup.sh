@@ -25,13 +25,29 @@ git clone https://github.com/CausalSim/Unbiased-Trace-Driven-Simulation.git
 
 # prepare dataset
 # ** ** 
-
+python3 data_preparation/create_dataset.py --dir CAUSALSIM_DIR-20-9-27/
+python data_preparation/generate_subset_data.py --dir CAUSALSIM_DIR-20-9-27/
 # train SLSim
-python training/sl_subset_train.py --dir CAUSALSIM_DIR --left_out_policy linear_bba  # python training/sl_subset_train.py --dir CAUSALSIM_DIR --left_out_policy target 
+python training/sl_subset_train.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy linear_bba  # python training/sl_subset_train.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy target 
 # train CasualSim
-python training/train_subset.py --dir CAUSALSIM_DIR --left_out_policy linear_bba --C 0.05 
+python training/train_subset.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy linear_bba --C 0.05 
 
+## Training
+#  Using CausalSim to extract and save the latent factors
+python inference/extract_subset_latents.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy linear_bba --C 0.05 
 # Counterfactual Simulation
-python inference/extract_subset_latents.py --dir CAUSALSIM_DIR --left_out_policy linear_bba --C 0.05 #  Using CausalSim to extract and save the latent factors
-python inference/expert_cfs.py --dir CAUSALSIM_DIR # ExpertSim
-python inference/sl_subset_cfs.py --dir CAUSALSIM_DIR --left_out_policy linear_bba # SLSim 
+python inference/expert_cfs.py --dir CAUSALSIM_DIR-20-9-27/ # ExpertSim
+python inference/sl_subset_cfs.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy linear_bba # SLSim 
+python inference/buffer_subset_cfs.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy linear_bba --C 0.05 # CausalSim
+# Calculate the average SSIM using the ground-truth data
+python analysis/original_subset_ssim.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy linear_bba # ExpertSim 
+python analysis/sl_subset_ssim.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy linear_bba # SLSim 
+python analysis/subset_ssim.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy linear_bba --C 0.05 # CausalSim 
+# Calculate the simulated buffer distribution's Earth Mover Distance (EMD) using the fround-truth data
+python analysis/subset_EMD.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy target --C Kappa # All{ExpertSim, SLSim, CausalSim}
+# Tune CausalSim's hyper-parameters for buffer and SSIM prediction
+python analysis/tune_buffer_hyperparameters.py --dir CAUSALSIM_DIR-20-9-27/
+
+## Inference  
+
+python inference/downloadtime_subset_cfs.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy target --C Kappa 
