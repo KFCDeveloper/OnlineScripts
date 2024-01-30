@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # https://github.com/PredWanTE/DOTE/tree/main?tab=readme-ov-file
+sudo apt-get update
 sudo apt-get install tmux
 tmux new -s dote
 
 cd /mydata
 sudo chmod -R  777 /mydata
-sudo chmod -R  777 ~
+# sudo chmod -R  777 ~
 
 # install nvidia-driver
 sudo add-apt-repository -y ppa:graphics-drivers/ppa
-sudo apt-get update
+sudo apt install ubuntu-drivers-common
 sudo apt-get install -y nvidia-driver-470
 
 # install conda
@@ -71,6 +72,7 @@ wget http://www.topology-zoo.org/files/Abilene.gml
 python3 gml_to_dote.py
 # don't forget!! To compute the optimum for the demand matrices, go to /mydata/DOTE/networking_envs/data/Abilene and run /mydata/DOTE/networking_envs/data/compute_opts.py
 cd /mydata/DOTE/networking_envs/data/Abilene
+python3 /mydata/DOTE/networking_envs/data/compute_opts.py   
 
 
 # install java8
@@ -87,3 +89,8 @@ python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train
 python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene --paths_from sp --sl_model_type linear_regression --sl_type stats_comm --opt_function MAXFLOW
 # eval
 python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene --paths_from sp --sl_model_type linear_regression --sl_type eval --opt_function MAXFLOW
+
+
+
+## Half bandwidth
+# modify gml_to_dote.py, line 126, add ``* 0.5``

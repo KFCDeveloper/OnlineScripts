@@ -5,6 +5,7 @@ sudo chmod -R  777 /mydata
 # install cuda
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt install ubuntu-drivers-common
+ubuntu-drivers devices​​​​​​​
 sudo apt-get install -y nvidia-driver-470
 
 # install conda
@@ -51,3 +52,5 @@ python analysis/tune_buffer_hyperparameters.py --dir CAUSALSIM_DIR-20-9-27/
 ## Inference  
 
 python inference/downloadtime_subset_cfs.py --dir CAUSALSIM_DIR-20-9-27/ --left_out_policy target --C Kappa 
+
+# draw 
