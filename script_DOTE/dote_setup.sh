@@ -11,7 +11,8 @@ sudo chmod -R  777 /mydata
 
 # install nvidia-driver
 sudo add-apt-repository -y ppa:graphics-drivers/ppa
-sudo apt install ubuntu-drivers-common
+sudo apt install ubuntu-drivers-common -y
+ubuntu-drivers devices
 sudo apt-get install -y nvidia-driver-470
 
 # install conda
