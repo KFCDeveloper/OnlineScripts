@@ -15,16 +15,22 @@ sudo apt install ubuntu-drivers-common -y
 ubuntu-drivers devices
 sudo apt-get install -y nvidia-driver-470
 
-# install conda
-cd /mydata
-sudo mkdir -p /mydata/miniconda3
-sudo wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
-sudo bash /mydata/miniconda3/miniconda.sh -b -u -p /mydata/miniconda3
-sudo /mydata/miniconda3/bin/conda init bash
-source ~/.bashrc
+
 
 # **todo** : to upload project from windows
-git clone https://github.com/PredWanTE/DOTE.git
+# git clone https://github.com/PredWanTE/DOTE.git
+git clone https://github.com/KFCDeveloper/ML4SysReproduceProjects.git
+mv ML4SysReproduceProjects DOTE
+cd DOTE
+git checkout -t origin/DOTE
+# upload through ssh from another server
+ssh-keygen -t rsa -b 2048
+cat ~/.ssh/id_rsa.pub
+# another sever: 
+sudo vim ~/.ssh/authorized_keys # copy the pub key to another server
+rsync -avz --progress -e ssh  /mydata/DOTE DylanYu@c240g5-110107.wisc.cloudlab.us:/mydata/
+
+
 # install gurobi
 mkdir -p /mydata/software
 cd /mydata/software
@@ -41,16 +47,23 @@ source ~/.bashrc
 grbgetkey xxxxxx # https://portal.gurobi.com/iam/licenses/request/?type=academic
 # ** BASE_PATH_LOCAL = "/mydata/DOTE/networking_envs" **
 
+# install conda
+cd /mydata
+sudo mkdir -p /mydata/miniconda3
+sudo wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
+sudo bash /mydata/miniconda3/miniconda.sh -b -u -p /mydata/miniconda3
+sudo /mydata/miniconda3/bin/conda init bash
+source ~/.bashrc
 # create new env and install package
 conda create --name dote python=3.8 -y
 conda activate dote
 cd /mydata/DOTE
 pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
-conda install scikit-learn numpy=1.19.5 scipy conda-forge::gym joblib dill progressbar2 mpi4py networkx tqdm keras pandas=1.1 statsmodels anaconda::tensorflow-gpu matplotlib
+conda install scikit-learn numpy=1.19.5 scipy conda-forge::gym joblib dill progressbar2 mpi4py networkx=2.8.8 tqdm keras pandas=1.1 statsmodels anaconda::tensorflow-gpu matplotlib
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt update
-sudo apt install gcc-9
-sudo apt install libstdc++6
+sudo apt install gcc-9 -y
+sudo apt install libstdc++6 -y
 
 #** use GEANT dataset **
 mkdir -p /mydata/software/GEANT
@@ -78,18 +91,20 @@ python3 /mydata/DOTE/networking_envs/data/compute_opts.py
 
 # install java8
 sudo apt-get update
-sudo apt install openjdk-8-jdk
+sudo apt install openjdk-8-jdk -y
 # ** **
 
 # DOTE training execution code
-python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 2000 --so_batch_size 200 --opt_function MAXFLOW
-python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 2000 --so_batch_size 32 --opt_function MAXUTIL
+# python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 50 --so_batch_size 200 --opt_function MAXFLOW
+python3 /mydata/DOTE/dote.py --ecmp_topo Abilene-cut-node --paths_from sp --so_mode train --so_epochs 20 --so_batch_size 32 --opt_function MAXUTIL
+# test
+python3 /mydata/DOTE/dote.py --ecmp_topo Abilene-cut-node --paths_from sp --so_mode train --so_epochs 20 --so_batch_size 32 --opt_function MAXUTIL
 
 # DOTE predict execution code
 # train: why first run this, than the latter; I find 1.processing training data 2.start training ;
-python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene --paths_from sp --sl_model_type linear_regression --sl_type stats_comm --opt_function MAXFLOW
+python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene-half --paths_from sp --sl_model_type linear_regression --sl_type stats_comm --opt_function MAXUTIL
 # eval
-python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene --paths_from sp --sl_model_type linear_regression --sl_type eval --opt_function MAXFLOW
+python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene-half --paths_from sp --sl_model_type linear_regression --sl_type eval --opt_function MAXUTIL
 
 
 
