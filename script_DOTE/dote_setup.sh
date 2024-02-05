@@ -85,8 +85,8 @@ wget http://www.topology-zoo.org/files/Abilene.gml
 # /networking_envs/data/gml_to_dote.py, set the src_dir, dest_dir and network_name variables.
 python3 gml_to_dote.py
 # don't forget!! To compute the optimum for the demand matrices, go to /mydata/DOTE/networking_envs/data/Abilene and run /mydata/DOTE/networking_envs/data/compute_opts.py
-cd /mydata/DOTE/networking_envs/data/Abilene
-python3 /mydata/DOTE/networking_envs/data/compute_opts.py   
+cd /mydata/DOTE/networking_envs/data/Abilene-0.75
+python3 /mydata/DOTE/networking_envs/data/compute_opts.py
 
 
 # install java8
@@ -96,9 +96,9 @@ sudo apt install openjdk-8-jdk -y
 
 # DOTE training execution code
 # python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 50 --so_batch_size 200 --opt_function MAXFLOW
-python3 /mydata/DOTE/dote.py --ecmp_topo Abilene-cut-node --paths_from sp --so_mode train --so_epochs 20 --so_batch_size 32 --opt_function MAXUTIL
+python3 /mydata/DOTE/dote.py --ecmp_topo Abilene-0.25 --paths_from sp --so_mode test --so_epochs 20 --so_batch_size 32 --opt_function MAXUTIL
 # test
-python3 /mydata/DOTE/dote.py --ecmp_topo Abilene-cut-node --paths_from sp --so_mode train --so_epochs 20 --so_batch_size 32 --opt_function MAXUTIL
+python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 20 --so_batch_size 32 --opt_function MAXUTIL
 
 # DOTE predict execution code
 # train: why first run this, than the latter; I find 1.processing training data 2.start training ;
