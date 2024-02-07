@@ -32,6 +32,7 @@ mv ML4SysReproduceProjects Unbiased-Trace-Driven-Simulation
 cd Unbiased-Trace-Driven-Simulation
 git checkout -t origin/Unbiased-Trace-Driven-Simulation
 # rsync -avz --progress -e ssh /mydata/Unbiased-Trace-Driven-Simulation/abr-puffer/CAUSALSIM_DIR /mydata/Unbiased-Trace-Driven-Simulation/abr-puffer/CAUSALSIM_DIR-20-11-27 /mydata/Unbiased-Trace-Driven-Simulation/abr-puffer/CAUSALSIM_DIR-20-11-27 /mydata/Unbiased-Trace-Driven-Simulation/abr-puffer/CAUSALSIM_DIR-21-1-27 DylanYu@c4130-110233.wisc.cloudlab.us:/mydata/Unbiased-Trace-Driven-Simulation/abr-puffer/
+rsync -av --progress /mydata/Unbiased-Trace-Driven-Simulation DylanYu@c240g5-110109.wisc.cloudlab.us:/mydata/
 # ln -s abr-puffer/CAUSALSIM_DIR-21-3-27/cooked abr-puffer/CAUSALSIM_DIR-21-3-27/
 
 # prepare dataset
