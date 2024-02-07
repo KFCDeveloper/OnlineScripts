@@ -76,3 +76,6 @@ python visualization/fig4_causal_only.py --dir CAUSALSIM_DIR-21-3-27/
 python visualization/fig7a_causal_only.py --dir CAUSALSIM_DIR/
 
 python visualization/fig7a_conbine.py --dir CAUSALSIM_DIR/  # do not change dir
+
+# run total bash # remember to change common_var.py && dir in bash file && dir in this scripts
+abr-puffer/run_more_targets.sh >abr-puffer/log/log21-3.txt 2>abr-puffer/log/error21-3.txt
