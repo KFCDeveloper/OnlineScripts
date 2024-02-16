@@ -50,3 +50,6 @@ sudo service docker start
 cd /mydata
 git clone https://github.com/delimitrou/DeathStarBench.git
 cd DeathStarBench/socialNetwork/
+sudo apt install dbus-x11 -y
+sudo apt install gnupg2 pass -y
+sudo docker-compose up -d
