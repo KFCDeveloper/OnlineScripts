@@ -1,0 +1,13 @@
+#!/bin/bash
+
+conda activate ydy-dote
+# in tfgirl dir env
+cd /data/ydy/myproject/DOTE/networking_envs/data/
+mkdir -p /data/ydy/myproject/DOTE/networking_envs/data/zoo_topologies
+wget http://www.topology-zoo.org/files/Abilene.gml
+# /networking_envs/data/gml_to_dote.py, set the src_dir, dest_dir and network_name variables.
+cd /data/ydy/myproject/DOTE/networking_envs/data/
+python loop_gml_to_dote.py 'Abilene' '-squeeze-links'
+# don't forget!! To compute the optimum for the demand matrices, go to /mydata/DOTE/networking_envs/data/Abilene and run /mydata/DOTE/networking_envs/data/compute_opts.py
+cd /data/ydy/myproject/DOTE/networking_envs/data/Abilene-squeeze-links-more1
+python /data/ydy/myproject/DOTE/networking_envs/data/loop_compute_opts.py 'Abilene-squeeze-links-more1'
