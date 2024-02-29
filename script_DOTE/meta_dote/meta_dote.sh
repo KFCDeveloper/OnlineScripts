@@ -11,3 +11,6 @@ python loop_gml_to_dote.py 'Abilene' '-squeeze-links'
 # don't forget!! To compute the optimum for the demand matrices, go to /mydata/DOTE/networking_envs/data/Abilene and run /mydata/DOTE/networking_envs/data/compute_opts.py
 cd /data/ydy/myproject/DOTE/networking_envs/data/Abilene-squeeze-links-more1
 python /data/ydy/myproject/DOTE/networking_envs/data/loop_compute_opts.py 'Abilene-squeeze-links-more1'
+
+
+python loop_gml_to_dote.py "Abilene" "('1', '10')" "('2', '9')"

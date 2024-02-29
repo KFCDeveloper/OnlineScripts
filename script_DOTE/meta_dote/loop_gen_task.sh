@@ -1,15 +1,15 @@
 #!/bin/bash
 
-targets=("bola_basic_v1" "bola_basic_v2")  # "linear_bba"
-root_dirs=("CAUSALSIM_DIR-21-1-27/" "CAUSALSIM_DIR-21-3-27/")   # "CAUSALSIM_DIR/" "CAUSALSIM_DIR-20-9-27/" "CAUSALSIM_DIR-20-11-27/" 
-c_s=("0.1" "0.5" "1.0" "5.0" "10.0" "15.0" "20.0" "25.0" "30.0" "40.0")    # "0.05"
+conda activate ydy-dote
 edges=("('0', '1')" "('0', '2')" "('1', '10')" "('2', '9')" "('3', '4')" "('3', '6')" "('4', '5')" "('4', '6')" "('5', '8')" "('6', '7')" "('7', '8')" "('7', '10')" "('8', '9')" "('9', '10')")
-for target in "${targets[@]}"
+for ((i=0; i<${#edges[@]}; i++)); # i=0; i<${#edges[@]};
 do
-    for root_dir in "${root_dirs[@]}"
+    for ((j=i+1; j<${#edges[@]}; i++));
     do  
         cd /data/ydy/myproject/DOTE/networking_envs/data/
-        python loop_gml_to_dote.py 'Abilene' '-squeeze-links'
+        python loop_gml_to_dote.py "Abilene" "${edges[i]}" "${edges[j]}"
         # don't forget!! To compute the optimum for the demand matrices, go to /mydata/DOTE/networking_envs/data/Abilene and run /mydata/DOTE/networking_envs/data/compute_opts.py
-        cd /data/ydy/myproject/DOTE/networking_envs/data/Abilene-squeeze-links-more1
-        python /data/ydy/myproject/DOTE/networking_envs/data/loop_compute_opts.py 'Abilene-squeeze-links-more1'
+        cd "/data/ydy/myproject/DOTE/networking_envs/data/Abilene-${edges[i]}-${edges[j]}"
+        python /data/ydy/myproject/DOTE/networking_envs/data/loop_compute_opts.py "Abilene-${edges[i]}-${edges[j]}"
+    done
+done
