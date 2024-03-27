@@ -9,6 +9,7 @@ sudo /mydata/miniconda3/bin/conda init bash
 source ~/.bashrc
 sudo chmod -R 777 /mydata/miniconda3
 sudo chmod -R 777 /mydata
+sudo chmod -R 777 ~/.conda/
 # create new env and install package
 conda create --name sinan python=3.8 -y
 conda activate sinan
