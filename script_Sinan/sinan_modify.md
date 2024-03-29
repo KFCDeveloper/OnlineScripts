@@ -3,3 +3,4 @@
 - 要修改ip的地方（这个 `swarm_ath.json` 应该可以用来作为全局读取ip的文件）
     - `/mydata/sinan-local/docker_swarm/config/swarm_ath.json`
 - 中间在collect data的时候，总是报 0.0.0.0:8080 连不上，我改成了 `addr = "http://localhost:8080"`，就不报错了，不知原因。
+- 22点00分 突然就fail了。去看了docker守备进程的报错，发现镜像根本没有拉取；于是去手动拉取镜像，发现超过拉取次数了，然后登录解决 [stackoverflow](https://stackoverflow.com/questions/65806330/toomanyrequests-you-have-reached-your-pull-rate-limit-you-may-increase-the-lim)  `sudo docker login --username=pinkwinston`
