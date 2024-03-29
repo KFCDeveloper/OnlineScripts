@@ -45,10 +45,23 @@ python3 setup_swarm_cluster.py --user-name DylanYu --deploy-config test_cluster.
 
 
 ## Data collection
-cd /mydata/sinan-local/docker_swarm/scripts
+
 # !! all the machine should have all the pub key, including themselves.
 # !! change mode, for each machine # sudo chmod -R 777 /mydata
-./run_data_collect.sh   # store data in docker_swarm/logs/collected_data
+# cd /mydata/sinan-local/docker_swarm/scripts
+# ./run_data_collect.sh   # store data in docker_swarm/logs/collected_data # it is running  master_data_collect_ath_social.py
+cd /mydata/sinan-local/docker_swarm/
+# python3 master_data_collect_ath_social.py --user-name DylanYu \
+# 	--stack-name sinan-socialnet \
+# 	--min-users 4 --max-users 8 --users-step 2 \
+# 	--exp-time 60 --measure-interval 1 --slave-port 40011 --deploy-config swarm_ath.json \
+# 	--mab-config social_mab.json --deploy
+python3 master_data_collect_ath_social.py --user-name DylanYu \
+	--stack-name sinan-socialnet \
+	--min-users 4 --max-users 48 --users-step 2 \
+	--exp-time 1200 --measure-interval 1 --slave-port 40011 --deploy-config swarm_ath.json \
+	--mab-config social_mab.json --deploy
+
 
 ## Training Model
 cd /mydata/sinan-local/ml_docker_swarm

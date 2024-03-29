@@ -2,3 +2,4 @@
 
 - 要修改ip的地方（这个 `swarm_ath.json` 应该可以用来作为全局读取ip的文件）
     - `/mydata/sinan-local/docker_swarm/config/swarm_ath.json`
+- 中间在collect data的时候，总是报 0.0.0.0:8080 连不上，我改成了 `addr = "http://localhost:8080"`，就不报错了，不知原因。
