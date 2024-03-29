@@ -1,4 +1,5 @@
 #!/bin/bash
+# don't need to care abount social network, sinan use code to start social network
 #(run this on each server)wget -O - https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_Sinan/social_network_setup_auto.sh | bash
 #(master node)sudo docker swarm init --advertise-addr $(curl -s icanhazip.com)
 #(slave node) sudo docker swarm join --token SWMTKN-1-3e290ee10t87o8t74ijncaie0whbpuh2u3trej3u77l4utna28-6c6yo36aslqzkl6mi3lmqa4gi 128.105.144.47:2377
@@ -34,7 +35,8 @@ cd /mydata/sinan-local/docker_swarm/
 # add $USER to docker group
 sudo groupadd docker
 sudo usermod -aG docker $USER
-getent group docker # !!activate the changes to groups; don't know why, but need to run this each time u run setup_swarm_cluster.py
+getent group docker 
+newgrp docker # reboot can permanent add # !!activate the changes to groups; don't know why, but need to run this each time u run setup_swarm_cluster.py
 conda activate sinan
 # !! gpu computer need generate pub key; slaves need to add pubkey # ssh-keygen -t rsa
 # !! slave also need to do # sudo groupadd docker # sudo usermod -aG docker $USER
@@ -44,7 +46,9 @@ python3 setup_swarm_cluster.py --user-name DylanYu --deploy-config test_cluster.
 
 ## Data collection
 cd /mydata/sinan-local/docker_swarm/scripts
-run_data_collect.sh   # store data in docker_swarm/logs/collected_data
+# !! all the machine should have all the pub key, including themselves.
+# !! change mode, for each machine # sudo chmod -R 777 /mydata
+./run_data_collect.sh   # store data in docker_swarm/logs/collected_data
 
 ## Training Model
 cd /mydata/sinan-local/ml_docker_swarm
