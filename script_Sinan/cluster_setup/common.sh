@@ -1,9 +1,10 @@
 #!/bin/bash
-# wget -O - https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_Sinan/social_network_setup_auto.sh | bash
+# wget -O - https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_Sinan/cluster_setup/common.sh | bash
 # install conda
 cd /mydata
+find /mydata/miniconda3 -mindepth 1 -maxdepth 1 ! -name "envs" -exec rm -rf {} +  # remove all the files except for "envs"
 sudo mkdir -p /mydata/miniconda3
-sudo wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
+sudo wget https://repo.anaconda.com/miniconda/Miniconda3-py39_24.1.2-0-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
 sudo bash /mydata/miniconda3/miniconda.sh -b -u -p /mydata/miniconda3
 sudo /mydata/miniconda3/bin/conda init bash
 source ~/.bashrc

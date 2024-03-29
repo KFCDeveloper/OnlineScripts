@@ -43,7 +43,12 @@ sudo vim ~/.bashrc
 # export LD_LIBRARY_PATH="${GUROBI_HOME}/lib"
 # export GRB_LICENSE_FILE="/users/DylanYu/gurobi.lic"
 # export PYTHONPATH="/mydata/DOTE/networking_envs:/mydata/DOTE/openai_baselines"
-source ~/.bashrc
+# on tfgirl
+# export GUROBI_HOME="/data/ydy/software/gurobi910/linux64"
+# export PATH="${PATH}:${GUROBI_HOME}/bin"
+# export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+# export GRB_LICENSE_FILE="/home/amax/gurobi.lic"
+source ~/.bashrc # !!!
 grbgetkey xxxxxx # https://portal.gurobi.com/iam/licenses/request/?type=academic
 # ** BASE_PATH_LOCAL = "/mydata/DOTE/networking_envs" **
 

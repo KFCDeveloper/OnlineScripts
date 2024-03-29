@@ -2,8 +2,10 @@
 # wget -O - https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_Sinan/social_network_setup_auto.sh | bash
 # install conda
 cd /mydata
+find /mydata/miniconda3 -mindepth 1 -maxdepth 1 ! -name "envs" -exec rm -rf {} +  # remove all the files except for "envs"
 sudo mkdir -p /mydata/miniconda3
-sudo wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
+sudo wget https://repo.anaconda.com/miniconda/Miniconda3-py39_24.1.2-0-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
+# sudo wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
 sudo bash /mydata/miniconda3/miniconda.sh -b -u -p /mydata/miniconda3
 sudo /mydata/miniconda3/bin/conda init bash
 source ~/.bashrc
@@ -53,4 +55,12 @@ git clone https://github.com/delimitrou/DeathStarBench.git
 cd DeathStarBench/socialNetwork/
 sudo apt install dbus-x11 -y
 sudo apt install gnupg2 pass -y
-# sudo docker-compose up -d
+# setup docker swarm cluster
+# Start docker containers on single machine with docker-compose || sudo docker-compose up -d
+# Start docker containers on a machine cluster with docker swarm
+### Manager Node
+# https://juejin.cn/post/7264168916293238821
+# init swarm
+sudo docker swarm init --advertise-addr $(curl -s icanhazip.com)
+### Slave Node
+sudo docker swarm join --token SWMTKN-1-3e290ee10t87o8t74ijncaie0whbpuh2u3trej3u77l4utna28-6c6yo36aslqzkl6mi3lmqa4gi 128.105.144.47:2377
