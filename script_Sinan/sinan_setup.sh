@@ -53,6 +53,10 @@ python3 setup_swarm_cluster.py --user-name DylanYu --deploy-config test_cluster.
 cd /mydata/sinan-local/docker_swarm/
 sudo docker login --username=pinkwinston # ! each node # login docker to avoid exceed the limit
 sudo chmod -R 777 /users/DylanYu/.docker/ # ! each node
+docker pull yz2297/social-network-ml-swarm:latest	# ! each node # use `sudo systemctl status docker` to see error
+docker pull yz2297/social-network-media-filter:latest	# ! each node
+docker pull yz2297/social-network-text-filter:latest
+docker pull yg397/openresty-thrift:xenial
 # python3 master_data_collect_ath_social.py --user-name DylanYu \
 # 	--stack-name sinan-socialnet \
 # 	--min-users 4 --max-users 8 --users-step 2 \
@@ -60,7 +64,7 @@ sudo chmod -R 777 /users/DylanYu/.docker/ # ! each node
 # 	--mab-config social_mab.json --deploy
 python3 master_data_collect_ath_social.py --user-name DylanYu \
 	--stack-name sinan-socialnet \
-	--min-users 4 --max-users 48 --users-step 2 \
+	--min-users 4 --max-users 36 --users-step 2 \
 	--exp-time 1200 --measure-interval 1 --slave-port 40011 --deploy-config swarm_ath.json \
 	--mab-config social_mab.json --deploy
 sudo /mydata/miniconda3/envs/sinan/bin/python master_data_collect_ath_social.py --user-name DylanYu \

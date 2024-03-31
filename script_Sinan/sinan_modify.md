@@ -2,5 +2,10 @@
 
 - 要修改ip的地方（这个 `swarm_ath.json` 应该可以用来作为全局读取ip的文件）
     - `/mydata/sinan-local/docker_swarm/config/swarm_ath.json`
+    - `/mydata/sinan-local/benchmarks/socialNetwork-ml-swarm/nginx-web-server/jaeger-config.json`
 - 中间在collect data的时候，总是报 0.0.0.0:8080 连不上，我改成了 `addr = "http://localhost:8080"`，就不报错了，不知原因。
 - 22点00分 突然就fail了。去看了docker守备进程的报错，发现镜像根本没有拉取；于是去手动拉取镜像，发现超过拉取次数了，然后登录解决 [stackoverflow](https://stackoverflow.com/questions/65806330/toomanyrequests-you-have-reached-your-pull-rate-limit-you-may-increase-the-lim)  `sudo docker login --username=pinkwinston`
+- 2024年3月31日 16点20分 docker ps 发现，nginx对应的那个容器一直崩溃然后restart，导致请求根本不能发给nginx服务
+    - 好了，找到原因了，是nginx volumes 映射的本地的文件，映射进去后，nginx的docker容器在那运行，结果运行崩了。注释掉了之后就不会出问题了。~~现在去 DeathStar里面把这个文件重新抄一下，以及对应的那几个本地文件全部抄DeathStar的 链接~~
+    - 非常无语，在 `/mydata/sinan-local/benchmarks/socialNetwork-ml-swarm/nginx-web-server/jaeger-config.json` 里面发现 没有写具体的ip或者主机名，应该是导致nginx崩溃的原因；记得要用 docker ps 看清楚对应的jaeger服务是在哪个服务器上。
+- 最后也没有报错，也没有开始收集，不知道在干什么；； nginx 打不出log `docker service logs -f --tail=10 sinan-socialnet_nginx-thrift` 完全没有任何log; 目前决定不弄了，没有思路了（没报错，怎么入手啊）
