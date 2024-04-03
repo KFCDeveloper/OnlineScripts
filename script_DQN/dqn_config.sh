@@ -23,7 +23,7 @@ conda create --name dqn python=3.8 -y
 conda activate dqn
 # install tensorflow 1 using cuda11. link from https://blog.csdn.net/qq_41204464/article/details/128389945
 pip install nvidia-pyindex
-pip install nvidia-tensorflow[horovod]
+pip install nvidia-tensorflow[horovod]==1.15.5+nv22.07 #21.8
 pip install nvidia-tensorboard==1.15
 # **restart** 
 # **todo** : to upload project from windows
@@ -37,5 +37,7 @@ rm -r "DeepQueueNet-synthetic data"
 rm DeepQueueNet-dataset.zip
 
 # install packages
-conda install pandas=1.1.5 scipy=1.10.1 seaborn=0.12.2 tqdm matplotlib=3.7.2 jupyter notebook -y
-conda install anaconda::scikit-learn numba::numba
+pip install numpy==1.23.5
+# conda install pandas=1.1.5 scipy=1.10.1 seaborn=0.12.2 tqdm matplotlib=3.7.2 jupyter notebook -y
+# conda install anaconda::scikit-learn numba::numba
+pip install pandas scipy seaborn matplotlib tqdm numba scikit-learn
