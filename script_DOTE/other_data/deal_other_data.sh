@@ -17,3 +17,6 @@ sudo apt install gcc-9 -y
 sudo apt install libstdc++6 -y
 cd /mydata/DOTE/networking_envs/save_models
 python3 /mydata/DOTE/dote.py --ecmp_topo "Abilene-2-('7', '8')-('9', '10')" --paths_from sp --so_mode train-fixdimen --so_epochs 20 --so_batch_size 16 --opt_function MAXUTIL
+
+# test
+python3 /mydata/DOTE/dote.py --ecmp_topo "GEANT" --paths_from sp --so_mode test-fixdimen --so_epochs 20 --so_batch_size 16 --opt_function MAXUTIL
