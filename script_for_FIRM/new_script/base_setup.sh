@@ -1,5 +1,5 @@
 #!/bin/bash
-# wget -O - https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_Sinan/cluster_setup/common.sh | bash
+# wget -O - https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_for_FIRM/new_script/base_setup.sh | bash
 # install conda
 cd /mydata
 find /mydata/miniconda3 -mindepth 1 -maxdepth 1 ! -name "envs" -exec rm -rf {} +  # remove all the files except for "envs"
