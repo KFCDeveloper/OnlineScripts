@@ -31,7 +31,7 @@ sudo apt-get update
 
 # you must install 
 # sudo apt-get install docker-ce=5:19.03.15~3-0~ubuntu-bionic docker-ce-cli=5:19.03.15~3-0~ubuntu-bionic containerd.io docker-buildx-plugin docker-compose-plugin -y
-sudo apt-get install docker-ce=5:19.03.5~3-0~ubuntu-$(lsb_release -cs) docker-ce-cli=5:19.03.5~3-0~ubuntu-$(lsb_release -cs) containerd.io
+sudo apt-get install docker-ce=5:19.03.5~3-0~ubuntu-$(lsb_release -cs) docker-ce-cli=5:19.03.5~3-0~ubuntu-$(lsb_release -cs) containerd.io -y
 # install docker compose
 # sudo curl -L "https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 # sudo chmod +x /usr/local/bin/docker-compose
@@ -44,7 +44,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo apt-get install libssl-dev -y
 sudo apt-get install libz-dev -y
 sudo apt-get install luarocks -y
-sudo luarocks install luasocket
+sudo luarocks install luasocket -y
 # ** change docker location
 # change the docker images savign path /etc/docker/daemon.json
 # {"graph": "/mydata/docker-image/storage"}
