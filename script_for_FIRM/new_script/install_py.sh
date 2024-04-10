@@ -3,5 +3,5 @@
 
 source ~/.bashrc
 # create new env and install package
-conda create --name firm python=3.7 -y
-conda activate firm
+/mydata/miniconda3/condabin/conda create --name firm python=3.7 -y
+/mydata/miniconda3/condabin/conda activate firm

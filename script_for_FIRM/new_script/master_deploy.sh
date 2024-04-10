@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## !make sure your master node can supporst MBA and CAT
+## !make sure your master node can supporst MBA and CAT; you would better use 
 lscpu | grep cat
 lscpu | grep mba
 uname -a
@@ -63,3 +63,21 @@ make all
 cd python-cat-mba
 # make env # just install python; maybe don't need
 
+####***** Set Up Microservice Benchmarks With Tracing Enabled
+
+# dns
+kubectl get service -n kube-system
+#! benchmarks/1-social-network/nginx-web-server/conf/nginx-k8s.conf (line 44)
+#! <path-of-repo>/benchmarks/1-social-network/media-frontend/conf/nginx-k8s.conf (line 37)
+
+# Deploy Services
+#! Change the /mydata/firm/ to <path-of-repo> in media-frontend.yaml and nginx-thrift.yaml under the <path-of-repo>/benchmarks/1-social-network/k8s-yaml directory.
+kubectl apply -f /mydata/firm/benchmarks/1-social-network/k8s-yaml/social-network-ns.yaml
+kubectl apply -f /mydata/firm/benchmarks/1-social-network/k8s-yaml/
+# previous command has error "compose-post-redis exits", a little bit weird.
+kubectl -n social-network get pod
+
+# Setup Services
+kubectl -n social-network get svc nginx-thrift # get its cluster IP
+#! modify /mydata/firm/benchmarks/1-social-network/scripts/init_social_graph.py line 74.
+#!

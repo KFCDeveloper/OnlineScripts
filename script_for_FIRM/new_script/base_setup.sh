@@ -12,8 +12,8 @@ sudo chmod -R 777 /mydata/miniconda3
 sudo chmod -R 777 /mydata
 sudo chmod -R 777 ~/.conda/
 # create new env and install package
-conda create --name firm python=3.7 -y
-conda activate firm
+/mydata/miniconda3/condabin/conda create --name firm python=3.7 -y
+# conda activate firm
 
 # install docker
 sudo apt update
