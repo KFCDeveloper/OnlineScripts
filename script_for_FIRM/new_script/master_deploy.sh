@@ -1,5 +1,9 @@
 #!/bin/bash
 
+## !make sure your master node can supporst MBA and CAT
+lscpu | grep cat
+lscpu | grep mba
+uname -a
 ## Deploy Kubernetes
 # sudo rm -rf /etc/containerd/config.toml
 # sudo systemctl restart containerd
@@ -13,10 +17,12 @@ kubectl get pods --all-namespaces
 
 ## Deploy FIRM  https://gitlab.engr.illinois.edu/DEPEND/firm/-/tree/master?ref_type=heads
 cd /mydata
-sudo git clone https://github.com/KFCDeveloper/firm.git # https://gitlab.engr.illinois.edu/DEPEND/firm.git
+# sudo git clone https://github.com/KFCDeveloper/firm.git # https://gitlab.engr.illinois.edu/DEPEND/firm.git
 cd firm/
 # pip3 install -r requirements.txt # something wrong with the packages
-sudo pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 wheel==0.30.0 numpy==1.18.1 redis==3.5.3 grpcio==1.31.0 torch==1.6.0 env==0.1.0 h5py==2.10.0 ipython Pillow==7.2.0 python_dateutil==2.8.1 scikit_learn==0.23.2 neo4j==4.1.0 grpcio-tools==1.30.0
+source ~/.bashrc
+conda activate firm
+pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 wheel==0.30.0 numpy==1.18.1 redis==3.5.3 grpcio==1.31.0 torch==1.6.0 env==0.1.0 h5py==2.10.0 ipython Pillow==7.2.0 python_dateutil==2.8.1 scikit_learn==0.23.2 neo4j==4.1.0 grpcio-tools==1.30.0
 # On each node, install anomaly injector:
 cd anomaly-injector
 sudo make
@@ -46,3 +52,14 @@ sudo docker-compose run stack-builder
 cd deploy-trace-grapher
 make prepare-trace-grapher-namespace
 make install-components
+
+# first install intel cmt cat (otherwise "cd python-cat-mba" and make env will have bug)
+cd /mydata/firm/third-party/intel-cmt-cat
+make all
+make install 
+# (not in the contrainer)Install deployment module:
+cd /mydata/firm/scripts
+make all
+cd python-cat-mba
+# make env # just install python; maybe don't need
+
