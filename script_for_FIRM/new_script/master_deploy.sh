@@ -22,7 +22,7 @@ cd firm/
 # pip3 install -r requirements.txt # something wrong with the packages
 source ~/.bashrc
 conda activate firm
-pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 wheel==0.30.0 numpy==1.18.1 redis==3.5.3 grpcio==1.31.0 torch==1.6.0 env==0.1.0 h5py==2.10.0 ipython Pillow==7.2.0 python_dateutil==2.8.1 scikit_learn==0.23.2 neo4j==4.1.0 grpcio-tools==1.30.0
+pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 wheel==0.30.0 numpy==1.18.1 redis==3.5.3 grpcio==1.31.0 torch==1.6.0 env==0.1.0 h5py==2.10.0 ipython Pillow==7.2.0 python_dateutil==2.8.1 scikit_learn==0.23.2 neo4j==4.1.0 grpcio-tools==1.30.0 aiohttp
 # On each node, install anomaly injector:
 cd anomaly-injector
 sudo make
@@ -80,4 +80,14 @@ kubectl -n social-network get pod
 # Setup Services
 kubectl -n social-network get svc nginx-thrift # get its cluster IP
 #! modify /mydata/firm/benchmarks/1-social-network/scripts/init_social_graph.py line 74.
-#!
+conda activate firm
+cd /mydata/firm/benchmarks/1-social-network/
+python3 ./scripts/init_social_graph.py # Register users and construct social graph 
+
+####***** To Run
+
+# Anomaly Injection
+#! download share_all_pub_key.py and run it on ** your machine **
+#! Configure the machine IP address  in `firm/anomaly-injector/injector.py`
+
+
