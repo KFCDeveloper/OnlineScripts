@@ -24,7 +24,7 @@ source ~/.bashrc
 conda activate firm
 pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 wheel==0.30.0 numpy==1.18.1 redis==3.5.3 grpcio==1.31.0 torch==1.6.0 env==0.1.0 h5py==2.10.0 ipython Pillow==7.2.0 python_dateutil==2.8.1 scikit_learn==0.23.2 neo4j==4.1.0 grpcio-tools==1.30.0 aiohttp
 # On each node, install anomaly injector:
-cd anomaly-injector
+cd /mydata/firm/anomaly-injector
 sudo make
 cd sysbench
 sudo ./autogen.sh
@@ -89,5 +89,13 @@ python3 ./scripts/init_social_graph.py # Register users and construct social gra
 # Anomaly Injection
 #! download share_all_pub_key.py and run it on ** your machine **
 #! Configure the machine IP address  in `firm/anomaly-injector/injector.py`
+# ** each node **: prepare files for generating disk I/O contention:
+cd /mydata/firm/anomaly-injector/
+mkdir test-files
+cd test-files
+sysbench fileio --file-total-size=150G prepare
 
+# On Master To run anomaly injection
+cd /mydata/firm/anomaly-injector/
+python3 injector.py
 
