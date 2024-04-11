@@ -95,7 +95,22 @@ mkdir test-files
 cd test-files
 sysbench fileio --file-total-size=150G prepare
 
-# On Master To run anomaly injection
+# On Master To run anomaly injection ! you'd better run this in a tmux session
 cd /mydata/firm/anomaly-injector/
 python3 injector.py
+
+# Workload Generation
+#! configure cluster IP; use output of `kubectl -n social-network get svc nginx-thrift` 
+# /mydata/firm/benchmarks/1-social-network/wrk2/scripts/social-network/compose-post.lua:66;
+# /mydata/firm/benchmarks/1-social-network/wrk2/scripts/social-network/read-home-timeline.lua:16;
+# /mydata/firm/benchmarks/1-social-network/wrk2/scripts/social-network/read-user-timeline.lua:16;
+# build the workload generator
+cd /mydata/firm/benchmarks/1-social-network/wrk2  
+make
+#! To run workload generation; change the cluster ip using output of `kubectl -n social-network get svc nginx-thrift`
+sudo luarocks install luasocket #! check each node
+# you'd better run it in tmux
+./wrk -D exp -t 8 -c 100 -R 1600 -d 1h -L -s /mydata/firm/benchmarks/1-social-network/wrk2/scripts/social-network/compose-post.lua http://10.107.132.35:8080/wrk2-api/post/compose
+
+# SVM Training
 
