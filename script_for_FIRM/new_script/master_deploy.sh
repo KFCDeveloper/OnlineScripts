@@ -26,6 +26,12 @@ pip3 install joblib==0.15.1 falcon==2.0.0 requests==2.18.4 matplotlib==3.1.3 whe
 # On each node, install anomaly injector:
 cd /mydata/firm/anomaly-injector
 sudo make
+
+cd pmbw-0.6.2
+./configure && make
+cd ..
+sudo apt -y install make automake libtool pkg-config libaio-dev libmysqlclient-dev libssl-dev iproute2
+
 cd sysbench
 sudo ./autogen.sh
 sudo apt install -y libmysqlclient-dev # lack MySQL libraries  
@@ -113,4 +119,41 @@ sudo luarocks install luasocket #! check each node
 ./wrk -D exp -t 8 -c 100 -R 1600 -d 1h -L -s /mydata/firm/benchmarks/1-social-network/wrk2/scripts/social-network/compose-post.lua http://10.107.132.35:8080/wrk2-api/post/compose
 
 # SVM Training
+# generate training dataset:
+cd /mydata/firm/data/social-network/svm_dataset
+#! configure cluster IP; 
+python /mydata/firm/metrics/analysis/cpa-training-labels.py #! you'd better run it in a tmux session # 15:42 
+#! change localhost to neo4j's cluster ip in the output of `kubectl get svc --all-namespaces`
+python /mydata/firm/metrics/analysis/cpa-training-features.py #! you'd better run it in a tmux session
+
+# RL Training
+# install if needed: sudo apt install redis-server
+sudo systemctl start redis
+sudo vim /etc/redis/redis.conf  #! comment out `bind x.x.x.x` line and add `bind 0.0.0.0`
+sudo systemctl restart redis
+# run metrics collector and store metrics in redis:
+python /mydata/firm/metrics/collector/collector.py #! you'd better run it in a tmux session
+# run sender which polls cAdvisor via its REST API:
+#! replace /path/to/repository in metrics/sender/cron/crontab
+#! replace the IP address of the machine running cAdvisor and collector in `sender.py` COLLECTOR_URL, CADVISOR_URL
+# you'd better install /mydata/firm/third-party/cAdvisor first
+# sudo apt install golang-go -y
+# cd /mydata/firm/third-party/cAdvisor
+# make all
+sudo docker run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:ro \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --volume=/dev/disk/:/dev/disk:ro \
+  --publish=8080:8080 \
+  --detach=true \
+  --name=cadvisor \
+  --privileged \
+  --device=/dev/kmsg \
+  gcr.io/cadvisor/cadvisor:v0.36.0
+
+crontab /mydata/firm/metrics/sender/cron/crontab # python /mydata/firm/metrics/sender/sender.py
+
+
 

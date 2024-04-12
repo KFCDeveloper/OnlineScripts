@@ -2,3 +2,4 @@
     - 一定要选择作者选择的软件版本，python应该是用的3.7，kubernetes官方已经没有对应的版本了，只能使用阿里云的镜像
     - master机器一定一定要选择支持 mba 和 cat 的，不然intel的那个 intel-mba 什么的，根本安装不上，cloudlab 选择 c6420 的机子
 - `python3 ./scripts/init_social_graph.py` 这个一开始老是有报错，说访问不通，然后我每个机子都git clone了；还是有问题，然后 ` addr = "http://10.107.132.35:8080"` 我乱写了一个，有问题; 我又填回了原来的那个，又没有问题了，非常奇怪。
+- 有点奇怪，lua的代码，`local socket = require("socket")` `math.randomseed(socket.gettime()*1000)` 在lua的命令行里运行就有问题。但是直接运行lua的文件却不会报错。

@@ -7,7 +7,7 @@ sudo mkdir -p /mydata/miniconda3
 sudo wget https://repo.anaconda.com/miniconda/Miniconda3-py39_24.1.2-0-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
 sudo bash /mydata/miniconda3/miniconda.sh -b -u -p /mydata/miniconda3
 sudo /mydata/miniconda3/bin/conda init bash
-source ~/.bashrc
+# source ~/.bashrc
 sudo chmod -R 777 /mydata/miniconda3
 sudo chmod -R 777 /mydata
 sudo chmod -R 777 ~/.conda/
