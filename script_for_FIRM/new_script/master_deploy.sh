@@ -43,14 +43,36 @@ cd /mydata/firm
 export NAMESPACE='monitoring'
 kubectl create -f manifests/setup
 kubectl create namespace observability
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.27.0/deploy/crds/jaegertracing.io_jaegers_crd.yaml
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.27.0/deploy/service_account.yaml
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.27.0/deploy/role.yaml
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.27.0/deploy/role_binding.yaml
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.27.0/deploy/operator.yaml
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.27.0/deploy/cluster_role.yaml
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.27.0/deploy/cluster_role_binding.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.15.1/deploy/crds/jaegertracing.io_jaegers_crd.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.15.1/deploy/service_account.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.15.1/deploy/role.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.15.1/deploy/role_binding.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.15.1/deploy/operator.yaml
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.15.1/deploy/cluster_role.yaml
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.15.1/deploy/cluster_role_binding.yaml
 kubectl create -f manifests/
+
+# Kafka 
+# https://strimzi.io/docs/quickstart/0.15.0/#ref-install-prerequisites-str   describe crd of Kafka Kubernetes
+mkdir -p /mydata/firm/mylittle-tool/base_kafka
+cd /mydata/firm/mylittle-tool/base_kafka
+wget https://github.com/strimzi/strimzi-kafka-operator/releases/download/0.15.0/strimzi-0.15.0.tar.gz
+chmod 777 strimzi-0.15.0.tar.gz
+tar -zxvf strimzi-0.15.0.tar.gz
+kubectl create ns kafka
+cd strimzi-0.15.0
+sed -i 's/namespace: .*/namespace: kafka/' install/cluster-operator/*RoleBinding*.yaml
+kubectl apply -f install/cluster-operator/ -n kafka
+# Istio
+# mkdir -p /mydata/firm/mylittle-tool/istio
+# cd /mydata/firm/mylittle-tool/istio
+# curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.0 TARGET_ARCH=x86_64 sh -
+# cd istio-1.5.0/
+# /mydata/firm/mylittle-tool/istio/istio-1.5.0/bin/istioctl install --set profile=demo -y
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/1.5.0/manifests/base/files/crd-all.gen.yaml 
+# cd /mydata/firm/trace-grapher/deploy-trace-grapher; kubectl apply -k ./overlays/docker-desktop;(make install-components)
+# 
+
 # Deploy graph database and pipeline for metrics storage
 cd trace-grapher
 sudo docker-compose run stack-builder
@@ -154,6 +176,12 @@ sudo docker run \
   gcr.io/cadvisor/cadvisor:v0.36.0
 
 crontab /mydata/firm/metrics/sender/cron/crontab # python /mydata/firm/metrics/sender/sender.py
-
+# run server which returns states and accepts actions to execute (on each node)
+conda activate firm
+pip install protobuf==3.20.*
+# modify REDIS_HOST, DATABASE
+python3 /mydata/firm/server.py
+python3 /mydata/firm/client.py
+python3 /mydata/firm/ddpg/main.py
 
 
