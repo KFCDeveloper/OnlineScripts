@@ -38,7 +38,7 @@ wget 'https://pypi.python.org/packages/source/s/selenium/selenium-2.39.0.tar.gz'
 sudo apt-get -y install xvfb xserver-xephyr tightvncserver unzip # python-setuptools python-pip
 tar xvzf selenium-2.39.0.tar.gz
 cd /mydata/software/pensive/selenium-2.39.0
-python setup.py install    # sudo python setup.py install
+python setup.py install    # sudo python setup.py install # pip 
 sudo sh -c "echo 'DBUS_SESSION_BUS_ADDRESS=/dev/null' > /etc/init.d/selenium"
 
 # py virtual display
@@ -53,19 +53,20 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 # sudo apt-get -y install python-pip python-dev
 # sudo pip install tensorflow
 pip install nvidia-pyindex
-pip install nvidia-tensorflow[horovod]==1.15.5+nv22.07    #21.8 
+pip install nvidia-tensorflow[horovod]==1.15.5+nv22.07    #21.8  1.15.5+nv22.07  nvidia_tensorflow-1.15.4+nv20.12-cp38-cp38-linux_x86_64.whl
 pip install nvidia-tensorboard==1.15
 
 # tflearn
-pip install tflearn # sudo 
+# pip install tflearn # sudo 
 # sudo apt-get -y install python-h5py
-pip install h5py
+# pip install h5py
 # sudo apt-get -y install python-scipy
-pip install scipy
-
+# pip install scipy
 # matplotlib
 # sudo apt-get -y install python-matplotlib
-pip install matplotlib
+# pip install matplotlib
+# !!!! numpy must be 1.20.0  Pillow==9.5.0
+pip install numpy==1.20.0 tflearn h5py scipy==1.10.1 matplotlib==3.7.5 pyvirtualdisplay Pillow==9.5.0
 
 # copy the webpage files to /var/www/html
 cd /mydata/pensieve
@@ -75,7 +76,7 @@ sudo cp -r video_server/video* /var/www/html
 sudo cp video_server/Manifest.mpd /var/www/html
 
 # make results directory
-mkdir cooked_traces
+mkdir sim/cooked_traces
 mkdir rl_server/results
 mkdir run_exp/results
 mkdir real_exp/results
@@ -83,3 +84,10 @@ mkdir real_exp/results
 #! need to copy the trace and pre-trained NN model
 # print "Need to put trace files in 'pensieve/cooked_traces'."
 # print "Need to put pre-trained NN model in 'pensieve/rl_server/results'."
+
+## Execute
+# link of dataset https://github.com/hongzimao/pensieve/issues/134 
+# train
+cd /mydata/pensieve/sim
+/mydata/miniconda3/envs/pensieve/bin/python /mydata/pensieve/sim/get_video_sizes.py
+/mydata/miniconda3/envs/pensieve/bin/python multi_agent.py
