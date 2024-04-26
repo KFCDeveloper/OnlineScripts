@@ -12,6 +12,9 @@ conda install pandas=1.1.5 scipy=1.10.1 seaborn=0.12.2 tqdm matplotlib=3.7.2 jup
 pip install ns.py
 # run some examples
 cd /mydata/ns.py/examples
+python tcp.py
+
+python examples/my_simu/tcp_.py
 
 # Testing the emulation mode with simple TCP and UDP echo servers
 python examples/real_traffic/tcp_echo_server.py 10000
