@@ -9,7 +9,7 @@ conda create -n ns.py python=3.9
 conda activate ns.py
 conda install pandas=1.1.5 scipy=1.10.1 seaborn=0.12.2 tqdm matplotlib=3.7.2 jupyter notebook -y
 # install ns.py using pip
-pip install ns.py
+# pip install ns.py #!!! don't do this
 # run some examples
 cd /mydata/ns.py/examples
 python tcp.py
