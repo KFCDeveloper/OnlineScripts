@@ -32,3 +32,5 @@ sudo apt install cmake
 
 # install ns3
 ./ns3 build
+
+# run script https://www.nsnam.org/docs/release/3.41/tutorial/html/getting-started.html#running-a-script
