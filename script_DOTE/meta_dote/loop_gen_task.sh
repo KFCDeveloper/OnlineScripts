@@ -6,7 +6,7 @@ for ((i=0; i<${#edges[@]}; i++)); # i=0; i<${#edges[@]};
 do
     for ((j=i+1; j<${#edges[@]}; i++));
     do  
-        cd /data/ydy/myproject/DOTE/networking_envs/data/
+        cd /mydata/DOTE/networking_envs/data/
         python loop_gml_to_dote.py "Abilene" "${edges[i]}" "${edges[j]}"
         # don't forget!! To compute the optimum for the demand matrices, go to /mydata/DOTE/networking_envs/data/Abilene and run /mydata/DOTE/networking_envs/data/compute_opts.py
         cd "/data/ydy/myproject/DOTE/networking_envs/data/Abilene-${edges[i]}-${edges[j]}"

@@ -38,10 +38,10 @@ wget https://packages.gurobi.com/9.1/gurobi9.1.0_linux64.tar.gz
 tar xvfz gurobi9.1.0_linux64.tar.gz
 # add .bashrc  ** sudo vim ~/.bashrc **
 sudo vim ~/.bashrc
-# export GUROBI_HOME="/mydata/software/gurobi910/linux64"
-# export PATH="${PATH}:${GUROBI_HOME}/bin"
-# export LD_LIBRARY_PATH="${GUROBI_HOME}/lib"
-# export GRB_LICENSE_FILE="/users/DylanYu/gurobi.lic"
+export GUROBI_HOME="/mydata/software/gurobi910/linux64"
+export PATH="${PATH}:${GUROBI_HOME}/bin"
+export LD_LIBRARY_PATH="${GUROBI_HOME}/lib"
+export GRB_LICENSE_FILE="/users/DylanYu/gurobi.lic"
 # export PYTHONPATH="/mydata/DOTE/networking_envs:/mydata/DOTE/openai_baselines"
 # on tfgirl
 # export GUROBI_HOME="/data/ydy/software/gurobi910/linux64"
