@@ -3,7 +3,8 @@ wget https://sndlib.put.poznan.pl/download/directed-geant-uhlig-15min-over-4mont
 chmod 777 directed-geant-uhlig-15min-over-4months-ALL-native.tgz
 tar -zxvf directed-geant-uhlig-15min-over-4months-ALL-native.tgz
 rm directed-geant-uhlig-15min-over-4months-ALL-native.tgz
-/mydata/miniconda3/envs/dote/bin/python gen_geant_topo.py
+mv directed-geant-uhlig-15min-over-4months-ALL-native GEANT
+/mydata/miniconda3/envs/dote/bin/python /mydata/DOTE/networking_envs/data/gen_geant_topo.py # gen_geant_topo.py
 cd /mydata/DOTE/networking_envs/data/GEANT
 
 conda activate dote
