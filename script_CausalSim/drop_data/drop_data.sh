@@ -1,5 +1,5 @@
 #!/bin/bash
-# https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_CausalSim/drop_data/drop_data.sh
+# wget -O - https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_CausalSim/drop_data/drop_data.sh | bash
 # copy directory CAUSALSIM_DIR-20-9-27-6 to CAUSALSIM_DIR-20-9-27-6monthmodel
 # copy {2020-11-27to2021-06-01_bola_basic_v1_trained_models, 2020-11-27to2021-06-01_bola_basic_v2_trained_models, 2020-11-27to2021-06-01_linear_bba_trained_models} to CAUSALSIM_DIR-20-9-27-6monthmodel
 # change name (above three) 2020-11-27to2021-06-01* to 2020-09-27to2021-06-01*
