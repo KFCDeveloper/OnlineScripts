@@ -115,3 +115,6 @@ python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene-half --paths_from sp --sl_mo
 
 ## Half bandwidth
 # modify gml_to_dote.py, line 126, add ``* 0.5``
+
+# !! need to check /mydata/DOTE/networking_envs/data_gen/utils.py Line91
+/mydata/miniconda3/envs/dote/bin/python /mydata/DOTE/networking_envs/data/loop_compute_opts.py "Cogentco-2-('0', '9')-('1', '8')"

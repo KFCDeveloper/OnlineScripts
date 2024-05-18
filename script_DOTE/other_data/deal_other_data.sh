@@ -26,6 +26,13 @@ python3 /mydata/DOTE/dote.py --ecmp_topo "GEANT" --paths_from sp --so_mode test-
 
 
 ### Brain
+cd /mydata/DOTE/real_traffic/download_data/Brain/one_year
+wget https://sndlib.put.poznan.pl/download/directed-brain-1h-over-375day-native.tgz
+chmod 777 directed-brain-1h-over-375day-native.tgz
+tar -zxvf directed-brain-1h-over-375day-native.tgz
+rm directed-brain-1h-over-375day-native.tgz
+mv directed-geant-uhlig-15min-over-4months-ALL-native GEANT
+
 cd /mydata/DOTE/networking_envs/data
 wget https://sndlib.put.poznan.pl/download/directed-geant-uhlig-15min-over-4months-ALL-native.tgz
 chmod 777 directed-geant-uhlig-15min-over-4months-ALL-native.tgz
