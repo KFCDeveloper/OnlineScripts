@@ -1,5 +1,6 @@
 #!/bin/bash
 # wget -O - https://raw.githubusercontent.com/KFCDeveloper/OnlineScripts/main/script_CausalSim/causalsim_more_bash.sh | bash
+# !! for each dir, need to run `python data_preparation/generate_subset_data.py --dir "$root_dir"`
 cd /mydata/Unbiased-Trace-Driven-Simulation/abr-puffer
 targets=("bola_basic_v1" "bola_basic_v2")  # "linear_bba"
 root_dirs=("CAUSALSIM_DIR-21-1-27/" "CAUSALSIM_DIR-21-3-27/")   # "CAUSALSIM_DIR/" "CAUSALSIM_DIR-20-9-27/" "CAUSALSIM_DIR-20-11-27/" 

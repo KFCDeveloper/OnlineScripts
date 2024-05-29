@@ -8,6 +8,7 @@ git clone https://github.com/TL-System/ns.py.git
 conda create -n ns.py python=3.9
 conda activate ns.py
 conda install pandas=1.1.5 scipy=1.10.1 seaborn=0.12.2 tqdm matplotlib=3.7.2 jupyter notebook -y
+pip install simpy networkx
 # install ns.py using pip
 # pip install ns.py #!!! don't do this
 # run some examples
@@ -23,3 +24,4 @@ conda install pandas=1.1.5 scipy=1.10.1 seaborn=0.12.2 tqdm matplotlib=3.7.2 jup
 # run my code
 /mydata/miniconda3/envs/ns.py/bin/python /mydata/ns.py/no_tcp_.py
 # have a look at /mydata/ns.py/2.txt
+/mydata/miniconda3/envs/ns.py/bin/python /mydata/ns.py/fattree.py
