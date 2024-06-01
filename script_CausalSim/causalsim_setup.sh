@@ -2,11 +2,13 @@
 
 cd /mydata
 sudo chmod -R  777 /mydata
+sudo apt update
 # install cuda
 sudo add-apt-repository ppa:graphics-drivers/ppa -y
 sudo apt install ubuntu-drivers-common -y
 ubuntu-drivers devices
 sudo apt-get install -y nvidia-driver-535       # 535   nvidia-driver-470
+# sudo apt-get install --reinstall libc6-i386
 
 # install conda
 sudo mkdir -p /mydata/miniconda3
