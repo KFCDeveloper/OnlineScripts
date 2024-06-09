@@ -20,4 +20,6 @@ sudo chmod -R 777 ~/.conda
 sudo chmod -R  777 /mydata
 source ~/.bashrc
 # create new env and install package
-conda create --name casual_sim_abr python=3.8 -y
+conda create --name pensieve_ppo python=3.9 -y
+conda activate pensieve_ppo
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
