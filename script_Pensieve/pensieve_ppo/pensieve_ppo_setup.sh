@@ -23,3 +23,4 @@ source ~/.bashrc
 conda create --name pensieve_ppo python=3.9 -y
 conda activate pensieve_ppo
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip3 install matplotlib scipy tensorboard
