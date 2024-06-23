@@ -48,7 +48,7 @@ cp -r /mydata/src/pytorch/torch/lib/tmp_install/include/THCUNN /mydata/opt/inclu
 cp -r /mydata/src/pytorch/torch/lib/tmp_install/include/THC /mydata/opt/include
 
 cd MimicNet/
-# ./run_1_compile.sh GPU
+# ./run_1_compile.sh GPU # 不过我发现他代码里的 run_all.sh 也没有在 compile的时候指定用GPU，并且在训练的时候 GPU是起效了的，所以我就没在意了
 ./run_1_compile.sh CPU # GPU编译不成功，因为只有libATen_cpu.so这个库，但是run_0的代码只能编译出这个，不知原因，需要libATen_cuda.so
 
 ./run_all.sh tcp GPU
