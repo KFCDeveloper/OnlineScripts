@@ -54,4 +54,4 @@ cd MimicNet/
 ./run_all.sh tcp GPU
 # 
 
-./run_2_generate.sh tcp GPU
+# ./run_2_generate.sh tcp GPU
