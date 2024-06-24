@@ -1,3 +1,9 @@
+
+cd /mydata/software/GEANT
+wget https://sndlib.put.poznan.pl/download/directed-geant-uhlig-15min-over-4months-ALL-native.tgz
+# 数据从 前两个也是空数据  ，并且从 demandMatrix-geant-uhlig-15min-20050831-0800.txt 开始就是空的了 要剔除；直接剔除行数小于100行的
+# 在画trend的时候又可以不用剔除了，为0的就设置为 Nan，画线会跳过。
+
 ### GEANT
 cd /mydata/DOTE/networking_envs/data
 wget https://sndlib.put.poznan.pl/download/directed-geant-uhlig-15min-over-4months-ALL-native.tgz
