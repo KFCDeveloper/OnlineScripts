@@ -77,8 +77,15 @@ cd /mydata/astraea-open-source/scripts/
 ./install_tensorflow_cc.sh  # note: change CRLF to LF
 
 
-CXX=/usr/bin/g++-9 cmake .. -DCOMPILE_INFERENCE_SERVICE=ON
+cd /mydata/astraea-open-source/third_party/
+git clone https://github.com/nlohmann/json.git
+
+cd /mydata/astraea-open-source/src/
+mkdir build && cd build
+# CXX=/usr/bin/g++-9 cmake .. -DCOMPILE_INFERENCE_SERVICE=ON
+CXX=/usr/bin/g++-9 cmake ..
 make -j
+
 
 
 
