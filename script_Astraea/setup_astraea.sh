@@ -66,8 +66,13 @@ sudo apt install ./kernel/deb/linux-image-5.4.73-learner_5.4.73-learner-1_amd64.
 cd src
 mkdir build && cd build
 sudo apt install cmake-mozilla
+CXX=/usr/bin/g++-9 cmake ..
+make -j
 
+# run
 cd /mydata/astraea-open-source/scripts/
+./src/build/bin/server --port=12345
+./src/build/bin/client_eval --ip=127.0.0.1 --port=12345 --cong=astraea --interval=30 --pyhelper=./python/infer.py --model=./models/py/
 
 ./install_tensorflow_cc.sh  # note: change CRLF to LF
 
