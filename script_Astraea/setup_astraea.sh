@@ -16,7 +16,11 @@ sudo fdisk /dev/sda
 # `w` to save 
 # reboot this machine 
 sudo resize2fs /dev/sda1
-
+# ---- setting swap if you need  ----
+sudo fdisk /dev/sda
+# `t` change partition, change sda2. code of partition type is 82
+sudo mkswap /dev/sda2
+sudo swapon /dev/sda2
 
 # cuda 11.04
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
