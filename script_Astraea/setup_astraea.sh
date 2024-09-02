@@ -77,17 +77,59 @@ sudo apt install ./kernel/deb/linux-image-5.4.73-learner_5.4.73-learner-1_amd64.
 # make -j
 
 
+# ./install_tensorflow_cc.sh  # note: change CRLF to LF
+# install Bazel https://bazel.build/install/ubuntu
+sudo apt install apt-transport-https curl gnupg -y
+curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor >bazel-archive-keyring.gpg
+sudo mv bazel-archive-keyring.gpg /usr/share/keyrings
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+sudo apt update
+sudo apt install bazel-5.4.0
+sudo ln -s /usr/bin/bazel-5.4.0 /usr/bin/bazel
 
-./install_tensorflow_cc.sh  # note: change CRLF to LF
+# tensorflow_cc  https://github.com/FloopCZ/tensorflow_cc/tree/v1.15.0
+sudo apt-get install build-essential curl git cmake unzip autoconf autogen automake libtool mlocate zlib1g-dev python python3-numpy python3-dev python3-pip python3-wheel wget
+sudo updatedb
+mkdir -p /mydata/_deps && cd /mydata/_deps
+git clone https://github.com/FloopCZ/tensorflow_cc.git
+cd /mydata/_deps/tensorflow_cc
+# git checkout v1.15.0  # do not checkout 
+
+cd /mydata/_deps/tensorflow_cc/tensorflow_cc
+mkdir build && cd build
+cd /mydata/_deps/tensorflow_cc/tensorflow_cc/build
+cmake ..
+make && sudo make install
+
+
+
+
+
+
 
 
 cd /mydata/astraea-open-source/third_party/
 git clone https://github.com/nlohmann/json.git
+# install cmake
+wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
+sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+sudo apt-get update
+sudo apt install cmake
+
+# g++-9
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+sudo apt update
+sudo apt install g++-9 -y
+g++-9 --version
+
+# boost lib
+sudo apt install libboost-all-dev
 
 cd /mydata/astraea-open-source/src/
 mkdir build && cd build
 # CXX=/usr/bin/g++-9 cmake .. -DCOMPILE_INFERENCE_SERVICE=ON
-CXX=/usr/bin/g++-9 cmake ..
+CXX=/usr/bin/g++-9 cmake .. -DCOMPILE_INFERENCE_SERVICE=ON
+# in /mydata/astraea-open-source/src/inference/tf_inference.cc `filename_tensor.scalar<std::string>()() = checkpoint_fn;`   change to  `filename_tensor.scalar<tensorflow::tstring>()() = checkpoint_fn;`
 make -j
 
 # run
@@ -95,28 +137,10 @@ make -j
 # run
 /mydata/astraea-open-source/src/build/bin/server --port=12345
 /mydata/astraea-open-source/src/build/bin/client_eval --ip=127.0.0.1 --port=12345 --cong=astraea --interval=30 --pyhelper=./python/infer.py --model=./models/py/
+/mydata/astraea-open-source/src/build/bin/infer --graph ./models/exported/model.meta --checkpoint ./models/exported/model --batch=0 --channel=udp
 
 
 
-# tensorflow_cc  https://github.com/FloopCZ/tensorflow_cc/tree/v1.15.0
-cd /mydata/tensorflow_cc
-git clone https://github.com/FloopCZ/tensorflow_cc.git
-cd /mydata/tensorflow_cc/tensorflow_cc
-mkdir build && cd build
-cd /mydata/tensorflow_cc/tensorflow_cc/build
-cmake ..
-make && sudo make install
-
-# install Bazel https://bazel.build/install/ubuntu
-sudo apt install apt-transport-https curl gnupg -y
-curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor >bazel-archive-keyring.gpg
-sudo mv bazel-archive-keyring.gpg /usr/share/keyrings
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
-
-sudo apt update
-sudo apt install bazel-5.4.0
-
-sudo ln -s /usr/bin/bazel-5.4.0 /usr/bin/bazel
 
 
 
