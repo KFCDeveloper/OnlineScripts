@@ -69,6 +69,19 @@ cd /mydata/astraea-open-source
 ## Install the kernel
 sudo apt install ./kernel/deb/linux-headers-5.4.73-learner_5.4.73-learner-1_amd64.deb
 sudo apt install ./kernel/deb/linux-image-5.4.73-learner_5.4.73-learner-1_amd64.deb
+## astraea kernel module for tcp
+cd /mydata/astraea-open-source/kernel/tcp-astraea
+# normal
+make 
+make install
+# bypass #!! if you want to **install another one**, you need to remove the installed one.
+make bypass=y
+make install bypass=y
+
+## install mahimahi
+sudo add-apt-repository ppa:keithw/mahimahi
+sudo apt-get update
+sudo apt-get install mahimahi
 
 # cd src
 # mkdir build && cd build
@@ -135,11 +148,15 @@ make -j
 # run
 /build/bin/server --port=12345
 # run
+cd /mydata/astraea-open-source
 /mydata/astraea-open-source/src/build/bin/server --port=12345
 /mydata/astraea-open-source/src/build/bin/client_eval --ip=127.0.0.1 --port=12345 --cong=astraea --interval=30 --pyhelper=./python/infer.py --model=./models/py/
 /mydata/astraea-open-source/src/build/bin/infer --graph ./models/exported/model.meta --checkpoint ./models/exported/model --batch=0 --channel=udp
 
-
+# run with mahimahi # do not use vscode terminal!! need to use other terminal
+mm-delay 10
+conda activate astraea
+/mydata/astraea-open-source/src/build/bin/client_eval --ip=$MAHIMAHI_BASE --port=12345 --cong=astraea --interval=30 --pyhelper=./python/infer.py --model=./models/py/
 
 
 
