@@ -20,10 +20,19 @@ source ~/.bashrc
 conda create --name flux python=3.8 -y
 conda activate flux
 
-pip install scikit-learn matplotlib pandas xgboost keras tensorflow
+pip install scikit-learn matplotlib pandas xgboost keras tensorflow shap
 
 cd /mydata/flux/ml/
 python ffnn.py
+# 无法运行
 
 
 
+# 安装一下 3.6 试一下别人写的flux的完整版
+conda create --name flux36 python=3.6 -y
+conda activate flux36
+
+conda install scikit-learn matplotlib pandas xgboost keras tensorflow shap seaborn
+cd /mydata/flow-prediction
+sh ./test_model.sh
+# callback 报错就直接删除 import callback就行了
