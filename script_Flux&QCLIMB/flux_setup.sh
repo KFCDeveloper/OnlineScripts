@@ -27,12 +27,14 @@ python ffnn.py
 # 无法运行
 
 
-
-# 安装一下 3.6 试一下别人写的flux的完整版
-conda create --name flux36 python=3.6 -y
+# -----------------------------------------------------------------------------------------
+# 安装一下 3.6 试一下别人写的flux的完整版   # https://github.com/ShreyaChak15/flow-prediction
+conda create --name flux38 python=3.8 -y
 conda activate flux36
 
-conda install scikit-learn matplotlib pandas xgboost keras tensorflow shap seaborn
+pip install scikit-learn==0.21.3
+pip install numpy matplotlib pandas xgboost keras tensorflow shap seaborn scikit-garden scikit-learn
+# run test  # callback 报错就直接删除 import callback就行了
 cd /mydata/flow-prediction
 sh ./test_model.sh
-# callback 报错就直接删除 import callback就行了
+# run RF
