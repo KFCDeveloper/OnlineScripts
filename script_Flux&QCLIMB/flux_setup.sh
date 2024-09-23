@@ -38,3 +38,6 @@ pip install numpy matplotlib pandas xgboost keras tensorflow shap seaborn scikit
 cd /mydata/flow-prediction
 sh ./test_model.sh
 # run RF
+cd /mydata/flow-prediction
+conda activate flux36
+python /mydata/flow-prediction/myfile/RF/RF.py -train
