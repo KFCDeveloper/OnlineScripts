@@ -28,8 +28,15 @@ python ffnn.py
 
 
 # -----------------------------------------------------------------------------------------
+cd /mydata
+sudo mkdir -p /mydata/miniconda3
+sudo wget https://repo.anaconda.com/miniconda/Miniconda3-py39_24.1.2-0-Linux-x86_64.sh -O /mydata/miniconda3/miniconda.sh
+sudo bash /mydata/miniconda3/miniconda.sh -b -u -p /mydata/miniconda3
+sudo /mydata/miniconda3/bin/conda init bash
+source ~/.bashrc
+# create new env and install package
 # 安装一下 3.6 试一下别人写的flux的完整版   # https://github.com/ShreyaChak15/flow-prediction
-conda create --name flux38 python=3.8 -y
+conda create --name flux36 python=3.6 -y
 conda activate flux36
 
 pip install scikit-learn==0.21.3
