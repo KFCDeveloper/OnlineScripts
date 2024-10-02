@@ -4,14 +4,8 @@
 cd /mydata
 sudo chmod -R  777 /mydata
 sudo apt update
-# install cuda
-sudo apt-get install --reinstall libc6-i386 -y
-sudo add-apt-repository ppa:graphics-drivers/ppa -y
-sudo apt install ubuntu-drivers-common -y
-ubuntu-drivers devices
-sudo apt-get install -y nvidia-driver-535       # 535   nvidia-driver-470 # use ubuntu22 18 ,not 20, it has some bugs
 
-
+# install cuda; using Ubuntu20.04
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
 sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
 wget https://developer.download.nvidia.com/compute/cuda/12.2.0/local_installers/cuda-repo-ubuntu2204-12-2-local_12.2.0-535.54.03-1_amd64.deb
