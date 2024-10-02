@@ -4,15 +4,12 @@
 cd /mydata
 sudo chmod -R  777 /mydata
 sudo apt update
-
-# install cuda; using Ubuntu20.04
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
-sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-wget https://developer.download.nvidia.com/compute/cuda/12.2.0/local_installers/cuda-repo-ubuntu2204-12-2-local_12.2.0-535.54.03-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu2204-12-2-local_12.2.0-535.54.03-1_amd64.deb
-sudo cp /var/cuda-repo-ubuntu2204-12-2-local/cuda-*-keyring.gpg /usr/share/keyrings/
-sudo apt-get update
-sudo apt-get -y install cuda
+# install cuda
+sudo apt-get install --reinstall libc6-i386 -y
+sudo add-apt-repository ppa:graphics-drivers/ppa -y
+sudo apt install ubuntu-drivers-common -y
+ubuntu-drivers devices
+sudo apt-get install -y nvidia-driver-535       # 535   nvidia-driver-470 # use ubuntu22 18 ,not 20, it has some bugs
 
 # install conda
 sudo mkdir -p /mydata/miniconda3
@@ -27,6 +24,3 @@ conda create --name pensieve_ppo python=3.9 -y
 conda activate pensieve_ppo
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 pip3 install matplotlib scipy tensorboard
-
-cd /mydata/Pensieve-PPO/src
-python train_less_features.py
