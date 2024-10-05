@@ -40,7 +40,7 @@ conda create --name flux36 python=3.6 -y
 conda activate flux36
 
 pip install scikit-learn==0.21.3
-pip install numpy matplotlib pandas xgboost keras tensorflow shap seaborn scikit-garden scikit-learn
+pip install numpy matplotlib pandas xgboost keras tensorflow shap seaborn scikit-garden scikit-learn 
 # run test  # callback 报错就直接删除 import callback就行了
 cd /mydata/flow-prediction
 sh ./test_model.sh
@@ -48,3 +48,8 @@ sh ./test_model.sh
 cd /mydata/flow-prediction
 conda activate flux36
 python /mydata/flow-prediction/myfile/RF/RF.py -train
+
+# ------------------------------
+# 如果只是运行我的文件，那么可以装 python3.9，并且安装 quantile-forest
+conda create --name flux39 python=3.9 -y
+pip install numpy matplotlib pandas xgboost keras tensorflow shap seaborn scikit-learn quantile-forest
