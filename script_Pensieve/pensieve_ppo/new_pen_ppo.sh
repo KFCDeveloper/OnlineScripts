@@ -30,7 +30,7 @@ conda activate pensieve_ppo
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 pip3 install matplotlib scipy tensorboard
 
-# 
+# git clone
 git clone https://github.com/KFCDeveloper/ML4SysReproduceProjects.git
 cd ML4SysReproduceProjects
 git checkout -t origin/Pensieve-PPO
@@ -40,3 +40,12 @@ mv ML4SysReproduceProjects Pensieve-PPO
 
 cd /mydata/Pensieve-PPO/src
 python train_less_features.py
+
+# ------ tensorboard
+cd /mydata/Pensieve-PPO/src
+tensorboard --logdir=./
+# ------ install tensorboard extension in vscode
+# Based on the turning point, you can determine an optimal time to terminate RL training.
+
+# 解析一下这个 `train_less_features.py`, tensorboard 是 train 的时候把东西写到 ppo 文件夹，然后每个 epoch 会进行 testing 东西写到 test_results
+
