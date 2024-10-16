@@ -39,7 +39,9 @@ mv ML4SysReproduceProjects Pensieve-PPO
 
 
 cd /mydata/Pensieve-PPO/src
-python train_less_features.py
+# python train_less_features.py
+# 现在不需要 less feature了，全 feature是可以不报错的; 将之前的 `S_INFO = 4` 修改为 `S_INFO = 6`
+python train.py
 
 # ------ tensorboard
 cd /mydata/Pensieve-PPO/src
@@ -48,4 +50,6 @@ tensorboard --logdir=./
 # Based on the turning point, you can determine an optimal time to terminate RL training.
 
 # 解析一下这个 `train_less_features.py`, tensorboard 是 train 的时候把东西写到 ppo 文件夹，然后每个 epoch 会进行 testing 东西写到 test_results
-
+# --- install cupy; 
+conda activate pensieve_ppo
+pip install cupy-cuda114 scikit-learn

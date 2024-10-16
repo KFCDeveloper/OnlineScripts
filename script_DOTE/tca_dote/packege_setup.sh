@@ -17,4 +17,4 @@ sudo apt update
 sudo apt install gcc-9 -y
 sudo apt install libstdc++6 -y
 
-
+python /mydata/DOTE/test.py --ecmp_topo "Abilene-2-('0', '1')-('3', '4')" --paths_from sp --so_mode train --so_epochs 100 --so_batch_size 15 --opt_function MAXUTIL
