@@ -68,6 +68,7 @@ sudo wget https://repo.anaconda.com/miniconda/Miniconda3-py39_24.1.2-0-Linux-x86
 sudo bash /mydata/miniconda3/miniconda.sh -b -u -p /mydata/miniconda3
 sudo /mydata/miniconda3/bin/conda init bash
 source ~/.bashrc
+sudo chmod -R  777 /mydata
 # create new env and install package
 conda create --name dote python=3.8 -y
 conda activate dote
