@@ -6,6 +6,22 @@ sudo chmod -R  777 /mydata
 sudo apt update
 cd /mydata
 
+# https://ubuntu.com/server/docs/nvidia-drivers-installation
+sudo apt install ubuntu-drivers-common
+sudo ubuntu-drivers list --gpgpu
+sudo ubuntu-drivers install --gpgpu nvidia:560
+sudo apt install nvidia-utils-560
+
+# ubuntu22  cuda12.6  不然 cloudlab老是抽风
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.6.0/local_installers/cuda-repo-ubuntu2204-12-6-local_12.6.0-560.28.03-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2204-12-6-local_12.6.0-560.28.03-1_amd64.deb
+sudo cp /var/cuda-repo-ubuntu2204-12-6-local/cuda-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-6
+
+
 # cuda 11.04 using ubuntu20.04
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
 sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -31,7 +47,7 @@ source ~/.bashrc
 # create new env and install package
 conda create --name pensieve_ppo python=3.9 -y
 conda activate pensieve_ppo
-pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118  # cu124
 pip3 install matplotlib scipy tensorboard
 
 # git clone
@@ -56,4 +72,5 @@ tensorboard --logdir=./
 # 解析一下这个 `train_less_features.py`, tensorboard 是 train 的时候把东西写到 ppo 文件夹，然后每个 epoch 会进行 testing 东西写到 test_results
 # --- install cupy; 
 conda activate pensieve_ppo
-pip install cupy-cuda114 scikit-learn
+# pip install cupy-cuda115 scikit-learn
+pip install cupy-cuda12x scikit-learn
