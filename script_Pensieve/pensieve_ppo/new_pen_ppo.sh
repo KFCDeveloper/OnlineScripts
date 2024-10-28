@@ -74,3 +74,8 @@ tensorboard --logdir=./
 conda activate pensieve_ppo
 # pip install cupy-cuda115 scikit-learn
 pip install cupy-cuda12x scikit-learn
+
+
+
+# --- Ubuntu22 on cloudlab
+sudo fdisk /dev/sdb

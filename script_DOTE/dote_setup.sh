@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# !!!! Gurobi910 May Need Ubuntu20, not Ubuntu22
 # https://github.com/PredWanTE/DOTE/tree/main?tab=readme-ov-file
 sudo apt-get update
 sudo apt-get install tmux
