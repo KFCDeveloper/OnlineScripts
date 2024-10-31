@@ -26,19 +26,19 @@ sudo apt-get update
 sudo apt-get -y install cuda-toolkit-12-6
 # ! and then restart, you can use cupy
 
-# cuda 11.04 using ubuntu20.04
-wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
-sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
-wget https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.0-470.42.01-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.0-470.42.01-1_amd64.deb
-sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
-sudo apt-get update
-sudo apt-get -y install cuda
-# env path variable
-vim ~/.bashrc # ! add
-# export LD_LIBRARY_PATH=/usr/local/cuda/lib64
-# export PATH=$PATH:/usr/local/cuda/bin
-source ~/.bashrc
+# # cuda 11.04 using ubuntu20.04
+# wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+# sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+# wget https://developer.download.nvidia.com/compute/cuda/11.4.0/local_installers/cuda-repo-ubuntu2004-11-4-local_11.4.0-470.42.01-1_amd64.deb
+# sudo dpkg -i cuda-repo-ubuntu2004-11-4-local_11.4.0-470.42.01-1_amd64.deb
+# sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
+# sudo apt-get update
+# sudo apt-get -y install cuda
+# # env path variable
+# vim ~/.bashrc # ! add
+# # export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+# # export PATH=$PATH:/usr/local/cuda/bin
+# source ~/.bashrc
 
 # install conda
 sudo mkdir -p /mydata/miniconda3
