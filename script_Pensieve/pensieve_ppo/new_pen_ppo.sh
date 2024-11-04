@@ -14,7 +14,7 @@ sudo apt install nvidia-utils-560
 
 sudo add-apt-repository -y ppa:graphics-drivers/ppa
 sudo apt-get install -y nvidia-driver-560
-sudo apt install nvidia-cuda-toolkit
+# sudo apt-get -y install cuda-toolkit-12-6
 
 # ubuntu22  cuda12.6  不然 cloudlab老是抽风
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
@@ -78,7 +78,6 @@ tensorboard --logdir=./
 conda activate pensieve_ppo
 # pip install cupy-cuda115 scikit-learn
 pip install cupy-cuda12x scikit-learn
-
 
 
 # --- Ubuntu22 on cloudlab
