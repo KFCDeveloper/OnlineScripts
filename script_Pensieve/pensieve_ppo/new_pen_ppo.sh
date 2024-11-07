@@ -95,4 +95,5 @@ cd /mydata/Pensieve-PPO/src
 python train.py
 
 ## training from scratch
-
+# test 里面 装 tca的test-dis1
+# train 里面 装 tca的test-dis0
