@@ -77,8 +77,22 @@ tensorboard --logdir=./
 # --- install cupy; 
 conda activate pensieve_ppo
 # pip install cupy-cuda115 scikit-learn
-pip install cupy-cuda12x scikit-learn
+pip install scikit-learn cupy-cuda12x 
 
 
 # --- Ubuntu22 on cloudlab
 sudo fdisk /dev/sdb
+
+
+## --------
+## direct transfer
+# train.py #29 change to `NN_MODEL = "/mydata/Pensieve-PPO/src/pretrain/nn_model_ep_100200.pth"`
+cd /mydata/Pensieve-PPO/src/test
+find . -type f ! -name '*ferry*' -exec rm -f {} +
+cd /mydata/Pensieve-PPO/src/train
+find . -type f ! -name '*ferry*' -exec rm -f {} +
+cd /mydata/Pensieve-PPO/src
+python train.py
+
+## training from scratch
+

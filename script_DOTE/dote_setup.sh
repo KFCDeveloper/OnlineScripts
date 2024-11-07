@@ -129,3 +129,5 @@ python3 ml/sl_algos/evaluate.py --ecmp_topo Abilene-half --paths_from sp --sl_mo
 
 # !! need to check /mydata/DOTE/networking_envs/data_gen/utils.py Line91
 /mydata/miniconda3/envs/dote/bin/python /mydata/DOTE/networking_envs/data/loop_compute_opts.py "Cogentco-2-('0', '9')-('1', '8')"
+
+python3 /mydata/DOTE/dote.py --ecmp_topo Abilene --paths_from sp --so_mode train --so_epochs 50 --so_batch_size 200 --opt_function MAXFLOW
