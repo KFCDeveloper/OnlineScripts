@@ -101,3 +101,8 @@ python train.py
 
 ## tca 
 # 修改 NN_model 为 pretrained model
+
+## plot figure # 
+cd /mydata/Pensieve-PPO-TCA/src/tca/plot/tca1e-4/
+conda activate pensieve_ppo
+python /mydata/Pensieve-PPO-TCA/src/tca/plot/plot.py
