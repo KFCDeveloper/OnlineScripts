@@ -97,3 +97,7 @@ python train.py
 ## training from scratch
 # test 里面 装 tca的test-dis1
 # train 里面 装 tca的test-dis0
+
+
+## tca 
+# 修改 NN_model 为 pretrained model
