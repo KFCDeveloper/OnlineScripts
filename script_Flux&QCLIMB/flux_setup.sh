@@ -51,6 +51,11 @@ python /mydata/flow-prediction/myfile/RF/RF.py -train
 
 # ------------------------------
 # 如果只是运行我的文件，那么可以装 python3.9，并且安装 quantile-forest
+git clone https://github.com/KFCDeveloper/ML4SysReproduceProjects.git
+mv ML4SysReproduceProjects flow-prediction
+cd flow-prediction
+git checkout -t origin/flow-prediction
+
 conda create --name flux39 python=3.9 -y
 conda activate flux39
 pip install numpy matplotlib pandas xgboost keras tensorflow shap seaborn scikit-learn quantile-forest
