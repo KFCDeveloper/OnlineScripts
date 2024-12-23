@@ -51,6 +51,10 @@ python /mydata/flow-prediction/myfile/RF/RF.py -train
 
 # ------------------------------
 # 如果只是运行我的文件，那么可以装 python3.9，并且安装 quantile-forest
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-get install git-lfs
+git lfs install
+
 git clone https://github.com/KFCDeveloper/ML4SysReproduceProjects.git
 mv ML4SysReproduceProjects flow-prediction
 cd flow-prediction
