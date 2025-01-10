@@ -22,4 +22,7 @@ sudo chmod -R 777 ~/.conda
 # no meta learner
 python main.py --operation=train --model_dir=./model --data_path=../data-firm/asource.csv
 # 这是flash的adaptation， checkpoint是pretrain model， data就是训练数据集
-python meta_main.py --operation=adaptation --checkpoint_path=./model/flashSourceModel-ep200.pth.tar --data_path=../data-firm/writefile_writefile_output.csv 
+python meta_main.py --operation=adaptation --checkpoint_path=./model/flashSourceModel-ep200.pth.tar --data_path=../data-firm/writefile_writefile_output.csv
+
+# no meta learner; ppo
+python main.py --operation=train --pool=./training_pool_1.txt --model_dir=./model --data_path=../data-firm/
