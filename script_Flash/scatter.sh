@@ -32,13 +32,35 @@ rm -f "$temp_file"
 echo "Unique names:"
 printf "%s\n" "${name_list[@]}"
 
-# mkdir -p ./model/three-ways/readfile_sleep_imageresize_output/train-from-scratch/
-# python main.py --operation=train --model_dir=./model/three-ways/readfile_sleep_imageresize_output/train-from-scratch/ --data_path=../data-firm/readfile_sleep_imageresize_output.csv > ./model/three-ways/readfile_sleep_imageresize_output/train-from-scratch/log
+# 遍历 name_list 动态生成目录并执行命令
+for name in "${name_list[@]}"; do
+  echo "Processing: $name"
+  # 创建目录
+  mkdir -p ./model/three-ways/"$name"/train-from-scratch/
+  mkdir -p ./model/three-ways/"$name"/pretained-test/
+  mkdir -p ./model/three-ways/"$name"/continual-learning/
+  # 复制文件并运行适应任务
+  cp ./model/pretraining-rl/ppo.pth.tar ./model/three-ways/"$name"/continual-learning/ppo_wait_to_adapt.pth.tar
+  # cp ./model/pretraining-rl/ppo-ep100.pth.tar ./model/three-ways/"$name"/continual-learning/ppo_wait_to_adapt.pth.tar
+done
 
-# # ppo_wait_to_adapt.pth.tar 复制到每个文件夹里
-# mkdir -p ./model/three-ways/readfile_sleep_imageresize_output/continual-learning/
-# cp ./model/compress/ppo-ep100.pth.tar ./model/three-ways/readfile_sleep_imageresize_output/continual-learning/ppo_wait_to_adapt.pth.tar
-# python main.py --operation=adaptation --model_dir=./model --checkpoint_path=./model/three-ways/readfile_sleep_imageresize_output/continual-learning/ppo_wait_to_adapt.pth.tar --data_path=../data-firm/readfile_sleep_imageresize_output.csv > ./model/three-ways/readfile_sleep_imageresize_output/continual-learning/log
 
-# mkdir -p ./model/three-ways/readfile_sleep_imageresize_output/pretained-test/
-# python main.py --operation=test --model_dir=./model --checkpoint_path=./model/compress/ppo-ep100.pth.tar --data_path=../data-firm/readfile_sleep_imageresize_output.csv > ./model/three-ways/readfile_sleep_imageresize_output/pretained-test/log
+for name in "${name_list[@]}"; do
+  echo "Processing: $name"
+  # 运行训练任务
+  tmux new-session -d -s tfc-"$name"
+  tmux send-keys -t tfc-"$name" "cd /mydata/flash/case-2-autoscaling" C-m
+  tmux send-keys -t tfc-"$name" "/mydata/miniconda3/envs/flash/bin/python main.py --operation=train --model_dir=./model/three-ways/$name/train-from-scratch/ --data_path=../data-firm/$name.csv > ./model/three-ways/$name/train-from-scratch/log" C-m
+  # python main.py --operation=train --model_dir=./model/three-ways/"$name"/train-from-scratch/ --data_path=../data-firm/"$name".csv > ./model/three-ways/"$name"/train-from-scratch/log
+
+  tmux new-session -d -s cl-"$name"
+  tmux send-keys -t cl-"$name" "cd /mydata/flash/case-2-autoscaling" C-m
+  tmux send-keys -t cl-"$name" "/mydata/miniconda3/envs/flash/bin/python main.py --operation=adaptation --model_dir=./model --checkpoint_path=./model/three-ways/"$name"/continual-learning/ppo_wait_to_adapt.pth.tar --data_path=../data-firm/$name.csv  > ./model/three-ways/$name/continual-learning/log" C-m
+  # python main.py --operation=adaptation --model_dir=./model --checkpoint_path=./model/three-ways/"$name"/continual-learning/ppo_wait_to_adapt.pth.tar --data_path=../data-firm/"$name".csv  > ./model/three-ways/"$name"/continual-learning/log
+
+  # 运行测试任务
+  tmux new-session -d -s pt-"$name"
+  tmux send-keys -t pt-"$name" "cd /mydata/flash/case-2-autoscaling" C-m
+  tmux send-keys -t pt-"$name" "/mydata/miniconda3/envs/flash/bin/python main.py --operation=test --model_dir=./model --checkpoint_path=./model/compress/ppo-ep100.pth.tar --data_path=../data-firm/$name.csv  > ./model/three-ways/$name/pretained-test/log" C-m
+  # python main.py --operation=test --model_dir=./model --checkpoint_path=./model/compress/ppo-ep100.pth.tar --data_path=../data-firm/"$name".csv  > ./model/three-ways/"$name"/pretained-test/log
+done
