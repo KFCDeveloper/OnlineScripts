@@ -1,4 +1,5 @@
 #!/bin/bash
+# Ubuntu 20.04
 
 cd /mydata
 sudo mkdir -p /mydata/miniconda3
