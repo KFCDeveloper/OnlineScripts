@@ -1,4 +1,6 @@
 #!/bin/bash
+# python main.py --operation=train --pool=./training_pool_1.txt --model_dir=./model --data_path=../data-firm/
+# obtain the pretained-model firstly
 cd /mydata/flash/case-2-autoscaling
 
 # 定义文件路径
