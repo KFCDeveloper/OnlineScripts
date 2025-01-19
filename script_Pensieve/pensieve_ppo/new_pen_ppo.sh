@@ -65,6 +65,7 @@ mv ML4SysReproduceProjects Pensieve-PPO
 cd /mydata/Pensieve-PPO/src
 # python train_less_features.py
 # 现在不需要 less feature了，全 feature是可以不报错的; 将之前的 `S_INFO = 4` 修改为 `S_INFO = 6`
+# 记得调整 thread 数量
 python train.py
 
 # ------ tensorboard
