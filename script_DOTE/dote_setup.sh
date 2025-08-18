@@ -74,12 +74,23 @@ sudo chmod -R  777 /mydata
 conda create --name dote python=3.8 -y
 conda activate dote
 cd /mydata/DOTE
-pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
-conda install scikit-learn numpy=1.19.5 scipy conda-forge::gym joblib dill progressbar2 mpi4py networkx=2.8.8 tqdm keras pandas=1.1 statsmodels anaconda::tensorflow-gpu matplotlib
+# pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
+# conda install scikit-learn numpy=1.19.5 scipy conda-forge::gym joblib dill progressbar2 mpi4py networkx=2.8.8 tqdm keras pandas=1.1 statsmodels anaconda::tensorflow-gpu matplotlib
+pip install torch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0
+conda install scikit-learn numpy=1.19.5 scipy conda-forge::gym joblib dill progressbar2 mpi4py networkx=2.8.8 tqdm keras pandas=1.1 statsmodels anaconda::tensorflow matplotlib
+pip uninstall charset-normalizer -y
+pip install charset-normalizer==3.3.2
+
+
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt update
 sudo apt install gcc-9 -y
 sudo apt install libstdc++6 -y
+
+
+
+conda install torch=1.11.0 torchvision=0.12.0 torchaudio=0.11.0 scikit-learn numpy=1.19.5 scipy conda-forge::gym joblib dill progressbar2 mpi4py networkx=2.8.8 tqdm keras pandas=1.1 statsmodels anaconda::tensorflow matplotlib
+
 
 #** use GEANT dataset **
 mkdir -p /mydata/software/GEANT
